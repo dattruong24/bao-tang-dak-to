@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quản lý bảo tàng</title>
+<style>
+  :root { --bg:#f6f3ee; --card:#fff; --ink:#2b2118; --muted:#6f6356; --line:#e2d9cc; --accent:#9a6b1f; --accent-2:#2f2620; --danger:#b3261e; --ok:#2e7d32; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font-family:'Segoe UI', system-ui, sans-serif; font-size:15px; }
+  header { position:sticky; top:0; z-index:5; background:var(--accent-2); color:#f3e9d8; padding:10px 16px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  header h1 { margin:0; font:600 18px/1.3 'Times New Roman', serif; flex:1; min-width:200px; }
+  header .state { font-size:13px; opacity:.85; }
+  button, .btn { font:inherit; border:1px solid var(--line); background:#fff; color:var(--ink); border-radius:8px; padding:7px 12px; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+  button:hover:not(:disabled), .btn:hover { border-color:var(--accent); }
+  button:disabled { opacity:.45; cursor:not-allowed; }
+  .primary { background:#d6b06a; border-color:#d6b06a; color:#1c1612; font-weight:600; }
+  header .btn { background:transparent; color:#f3e9d8; border-color:rgba(214,176,106,.6); }
+  main { max-width:1000px; margin:0 auto; padding:16px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .tab { padding:8px 14px; border-radius:999px; }
+  .tab.on { background:var(--accent-2); color:#f3e9d8; border-color:var(--accent-2); }
+  .tab .n { font-size:12px; opacity:.75; margin-left:4px; }
+  .tab.full .n { color:#e0a040; opacity:1; }
+  .room-head { display:flex; flex-wrap:wrap; gap:12px; align-items:end; margin-bottom:12px; }
+  .room-head label { flex:1; min-width:240px; }
+  .count { font-size:14px; color:var(--muted); }
+  .count b { color:var(--ink); }
+  .note { background:#fff8e8; border-left:4px solid #d6b06a; padding:8px 12px; margin:0 0 12px; border-radius:4px; font-size:14px; }
+  label { display:block; font-size:13px; color:var(--muted); }
+  label > span { display:block; margin-bottom:4px; }
+  input[type=text], textarea { width:100%; font:inherit; color:var(--ink); border:1px solid var(--line); border-radius:8px; padding:8px 10px; background:#fff; }
+  textarea { min-height:110px; resize:vertical; line-height:1.5; }
+  input:focus, textarea:focus { outline:2px solid #d6b06a; border-color:transparent; }
+  .item { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; margin-bottom:12px; display:grid; grid-template-columns:220px 1fr; gap:14px; }
+  .item.changed { border-color:#d6b06a; box-shadow:0 0 0 1px #d6b06a; }
+  .pic { display:flex; flex-direction:column; gap:8px; }
+  .pic .no { font-weight:600; color:var(--accent); }
+  .pic img { width:100%; aspect-ratio:4/3; object-fit:contain; background:#efe9e0; border-radius:8px; }
+  .pic .ph { width:100%; aspect-ratio:4/3; background:#efe9e0; border-radius:8px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:13px; text-align:center; padding:8px; }
+  .pic .row { display:flex; gap:6px; flex-wrap:wrap; }
+  .pic .row button { padding:5px 9px; font-size:13px; }
+  .del { color:var(--danger); }
+  .fields { display:grid; gap:10px; min-width:0; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .plaque { background:#2f2620; color:#f3e9d8; border-radius:6px; padding:8px 12px; text-align:center; font-family:'Times New Roman', serif; }
+  .plaque .t { font-weight:700; font-size:16px; }
+  .plaque .c { font-size:12.5px; color:#cdbfa8; margin-top:2px; }
+  .plaque .t:empty::before { content:'(không có tên ảnh)'; opacity:.5; font-weight:400; }
+  .plaque.none { background:#efe9e0; color:var(--muted); }
+  .plaque.none .t::before { content:'Không có bảng tên dưới tranh (chưa điền tên và nguồn)'; font-weight:400; font-size:13px; font-family:'Segoe UI', sans-serif; opacity:1; }
+  .hint { font-size:12px; color:var(--muted); }
+  .add { width:100%; justify-content:center; padding:12px; border-style:dashed; font-size:15px; }
+  #log { white-space:pre-wrap; font:12.5px/1.45 Consolas, monospace; background:#1f1a16; color:#e9dfcf; border-radius:8px; padding:10px 12px; max-height:260px; overflow:auto; margin:0 0 14px; }
+  #msg { margin:0 0 12px; padding:10px 12px; border-radius:8px; display:none; }
+  #msg.ok { display:block; background:#e8f5e9; color:var(--ok); }
+  #msg.err { display:block; background:#fdecea; color:var(--danger); }
+  #msg.busy { display:block; background:#fff8e8; color:#7a5414; }
+  #who { font-size:13px; opacity:.85; }
+  #logout { padding:5px 10px; font-size:13px; background:transparent; color:#f3e9d8; border-color:rgba(214,176,106,.6); }
+  /* ---------- đăng nhập ---------- */
+  #login { position:fixed; inset:0; z-index:20; display:flex; align-items:center; justify-content:center; padding:16px; overflow:auto;
+    background:#1c1612; color:#f3e9d8; }
+  #login[hidden] { display:none; }
+  #login .bg { position:fixed; inset:-30px; background:#2f2620 center/cover no-repeat; filter:blur(10px) saturate(.75) brightness(.55); transform:scale(1.04); transition:opacity .8s; opacity:0; }
+  #login .bg.on { opacity:1; }
+  #login .veil { position:fixed; inset:0; background:radial-gradient(ellipse at center, rgba(28,22,18,.35) 0%, rgba(28,22,18,.88) 75%); }
+  #login .card { position:relative; width:min(400px, 100%); padding:34px 30px 24px; border-radius:16px;
+    background:linear-gradient(180deg, rgba(47,38,32,.92), rgba(33,26,21,.95)); border:1px solid rgba(214,176,106,.35);
+    box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.04); backdrop-filter:blur(6px);
+    animation:card-in .45s ease-out; }
+  @keyframes card-in { from { opacity:0; transform:translateY(14px) scale(.98); } }
+  #login .card.shake { animation:shake .42s; }
+  @keyframes shake { 20%,60% { transform:translateX(-8px); } 40%,80% { transform:translateX(8px); } }
+  #login .emblem { width:64px; height:64px; margin:0 auto 14px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 35% 30%, #e7c98c, #b48a43 70%); box-shadow:0 0 0 4px rgba(214,176,106,.18), 0 6px 18px rgba(0,0,0,.4); }
+  #login .emblem svg { width:34px; height:34px; }
+  #login .kicker { text-align:center; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:#d6b06a; }
+  #login h2 { margin:6px 0 4px; text-align:center; font:600 23px/1.3 'Times New Roman', serif; color:#f6ecda; }
+  #login .sub { margin:0 0 22px; text-align:center; font-size:13.5px; color:#bfb09a; }
+  #login .rule { height:1px; margin:0 auto 22px; width:70%; background:linear-gradient(90deg, transparent, rgba(214,176,106,.6), transparent); }
+  #login .field { position:relative; margin-bottom:14px; }
+  #login .field label { color:#cdbfa8; font-size:12.5px; margin-bottom:6px; display:block; }
+  #login .field .ic { position:absolute; left:12px; bottom:12px; width:18px; height:18px; color:#a8977e; pointer-events:none; }
+  #login .field input { width:100%; padding:11px 42px 11px 40px; font:inherit; font-size:15px; color:#f6ecda; background:rgba(255,255,255,.06);
+    border:1px solid rgba(214,176,106,.28); border-radius:10px; transition:border-color .15s, background .15s, box-shadow .15s; }
+  #login .field input::placeholder { color:#8f8270; }
+  #login .field input:focus { outline:none; border-color:#d6b06a; background:rgba(255,255,255,.09); box-shadow:0 0 0 3px rgba(214,176,106,.18); }
+  #login .eye { position:absolute; right:6px; bottom:5px; width:34px; height:34px; padding:0; border:0; border-radius:8px; background:transparent; color:#a8977e; justify-content:center; }
+  #login .eye:hover { color:#f3e9d8; background:rgba(255,255,255,.06); }
+  #login .eye svg { width:18px; height:18px; }
+  #login .caps { margin:-6px 0 10px; font-size:12.5px; color:#e0b45c; }
+  #login .err { display:flex; gap:8px; align-items:flex-start; margin:0 0 14px; padding:9px 12px; border-radius:8px; font-size:13.5px;
+    background:rgba(179,38,30,.16); border:1px solid rgba(229,115,105,.35); color:#f2b8b1; }
+  #login .err:empty { display:none; }
+  #login .go { width:100%; justify-content:center; padding:12px; font-size:15.5px; border-radius:10px; border:0;
+    background:linear-gradient(180deg, #e3c181, #c99a4b); color:#1c1612; font-weight:700; letter-spacing:.02em;
+    box-shadow:0 6px 18px rgba(201,154,75,.28); transition:transform .1s, box-shadow .15s, filter .15s; }
+  #login .go:hover:not(:disabled) { filter:brightness(1.06); box-shadow:0 8px 22px rgba(201,154,75,.38); }
+  #login .go:active:not(:disabled) { transform:translateY(1px); }
+  #login .go:disabled { opacity:.75; cursor:wait; }
+  #login .spin { width:16px; height:16px; border-radius:50%; border:2px solid rgba(28,22,18,.3); border-top-color:#1c1612; animation:spin .7s linear infinite; display:none; }
+  #login .go:disabled .spin { display:inline-block; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  #login .foot { margin:18px 0 0; text-align:center; font-size:12px; color:#8f8270; line-height:1.5; }
+  @media (prefers-reduced-motion: reduce) { #login .card, #login .card.shake, #login .spin { animation:none; } }
+  @media (max-width:700px) {
+    .item { grid-template-columns:1fr; }
+    .two { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Quản lý bảo tàng</h1>
+  <span class="state" id="state">Đang tải…</span>
+  <a class="btn" href="index.html" target="_blank">Mở bảo tàng ↗</a>
+  <button class="primary" id="save" disabled>Lưu &amp; cập nhật bảo tàng</button>
+  <span id="who" hidden></span>
+  <button id="logout" hidden>Đăng xuất</button>
+</header>
+<div id="login" hidden>
+  <div class="bg" id="login-bg"></div>
+  <div class="veil"></div>
+  <form class="card" id="login-form" autocomplete="on" novalidate>
+    <div class="emblem" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#2f2620" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9.5 12 4l9 5.5"/><path d="M4.5 10v8M9 10v8M15 10v8M19.5 10v8"/><path d="M3 20.5h18"/><path d="M3.5 9.5h17"/>
+      </svg>
+    </div>
+    <div class="kicker">Bảo tàng số 4.0</div>
+    <h2>Chiến thắng Đăk Tô – Tân Cảnh</h2>
+    <p class="sub">Đăng nhập để quản lý ảnh và lời giới thiệu</p>
+    <div class="rule"></div>
+    <div class="field">
+      <label for="login-user">Tên đăng nhập</label>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+      <input type="text" id="login-user" autocomplete="username" placeholder="Nhập tên đăng nhập" autocapitalize="off" spellcheck="false">
+    </div>
+    <div class="field">
+      <label for="login-pass">Mật khẩu</label>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>
+      <input type="password" id="login-pass" autocomplete="current-password" placeholder="Nhập mật khẩu">
+      <button type="button" class="eye" id="login-eye" aria-label="Hiện mật khẩu" title="Hiện mật khẩu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="slash" d="M4 4l16 16" style="display:none"/></svg>
+      </button>
+    </div>
+    <p class="caps" id="login-caps" hidden>⇪ Đang bật Caps Lock</p>
+    <p class="err" id="login-err" role="alert"></p>
+    <button class="go" type="submit" id="login-btn"><span class="spin"></span><span id="login-btn-text">Đăng nhập</span></button>
+    <p class="foot">Trang quản lý chỉ chạy trên máy này.<br>Tài khoản ở <code>tools\tai-khoan.json</code>.</p>
+  </form>
+</div>
+<main>
+  <div id="msg"></div>
+  <pre id="log" hidden></pre>
+  <nav class="tabs" id="tabs"></nav>
+  <section id="room"></section>
+</main>
+<input type="file" id="file" accept="image/*,.jfif,.avif,.pdf" hidden>
+
+<script type="module">
+import { capacity } from './layout.js';
+
+const $ = (id) => document.getElementById(id);
+const el = (tag, props = {}, ...kids) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
+let data = null, saved = '', current = 0, busy = false;
+const thumbs = new Map();        // source image path -> preview url
+let pickFor = null;              // { gallery, index | null } while the file dialog is open
+
+const paras = (text) => text.split(/\n\s*\n/).map((p) => p.replace(/\s*\n\s*/g, ' ').trim()).filter(Boolean);
+const joinParas = (list) => (list || []).join('\n\n');
+const dirty = () => data !== null && JSON.stringify(data) !== saved;
+
+// ---------- đăng nhập ----------
+// Server giữ phiên (cookie 8 giờ) và chặn mọi API khi chưa đăng nhập; trang này chỉ hiện khung nhập.
+let afterLogin = null;
+function askLogin(reason, then) {
+  afterLogin = then;
+  $('login-err').textContent = reason || '';
+  $('login').hidden = false;
+  loginBackground();
+  ($('login-user').value ? $('login-pass') : $('login-user')).focus();
+}
+// Nền: ảnh tượng đài (ảnh đầu Gian 3) làm mờ; không có thì giữ màu nâu.
+async function loginBackground() {
+  try {
+    const { GALLERIES } = await import('./content.js');
+    const it = GALLERIES[2]?.items[0] || GALLERIES[0]?.items[0];
+    if (!it) return;
+    const img = new Image();
+    img.onload = () => { $('login-bg').style.backgroundImage = `url("${it.full}")`; $('login-bg').classList.add('on'); };
+    img.src = it.full;
+  } catch { /* không có ảnh nền cũng được */ }
+}
+function shakeLogin() {
+  const card = $('login-form');
+  card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
+}
+$('login-eye').onclick = () => {
+  const p = $('login-pass'), show = p.type === 'password';
+  p.type = show ? 'text' : 'password';
+  $('login-eye').querySelector('.slash').style.display = show ? '' : 'none';
+  $('login-eye').title = $('login-eye').ariaLabel = show ? 'Ẩn mật khẩu' : 'Hiện mật khẩu';
+  p.focus();
+};
+for (const type of ['keydown', 'keyup']) {
+  $('login-pass').addEventListener(type, (ev) => { $('login-caps').hidden = !ev.getModifierState?.('CapsLock'); });
+}
+$('login-pass').addEventListener('blur', () => { $('login-caps').hidden = true; });
+function showUser(user) {
+  $('who').textContent = user ? `👤 ${user}` : '';
+  $('who').hidden = $('logout').hidden = !user;
+}
+$('login-form').onsubmit = async (ev) => {
+  ev.preventDefault();
+  const user = $('login-user').value.trim(), pass = $('login-pass').value;
+  if (!user || !pass) {
+    $('login-err').textContent = !user ? 'Nhập tên đăng nhập.' : 'Nhập mật khẩu.';
+    shakeLogin(); (!user ? $('login-user') : $('login-pass')).focus();
+    return;
+  }
+  $('login-btn').disabled = true; $('login-btn-text').textContent = 'Đang kiểm tra…'; $('login-err').textContent = '';
+  try {
+    const res = await fetch('/api/dang-nhap', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user, password: pass }) });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(out.error ? out.error[0].toUpperCase() + out.error.slice(1) + '.' : 'Không đăng nhập được.');
+    $('login-pass').value = '';
+    $('login').hidden = true;
+    showUser(out.user);
+    const then = afterLogin; afterLogin = null;
+    if (then) await then();
+  } catch (e) {
+    $('login-err').textContent = e.message;
+    shakeLogin(); $('login-pass').select();
+  }
+  $('login-btn').disabled = false; $('login-btn-text').textContent = 'Đăng nhập';
+};
+$('logout').onclick = async () => {
+  if (dirty() && !$('logout').dataset.sure) {
+    $('logout').dataset.sure = '1'; $('logout').textContent = 'Bỏ thay đổi & đăng xuất?';
+    setTimeout(() => { delete $('logout').dataset.sure; $('logout').textContent = 'Đăng xuất'; }, 4000);
+    return;
+  }
+  await fetch('/api/dang-xuat', { method: 'POST' });
+  location.reload();
+};
+// Gọi API; hết phiên thì hiện khung đăng nhập rồi gọi lại, không mất phần đang sửa.
+async function api(url, opts) {
+  const res = await fetch(url, opts);
+  if (res.status !== 401) return res;
+  showUser(null);
+  return new Promise((resolve, reject) => askLogin('Phiên đăng nhập đã hết, đăng nhập lại để tiếp tục.',
+    () => fetch(url, opts).then(resolve, reject)));
+}
+
+async function load() {
+  const [res, content] = await Promise.all([api('/api/noi-dung'), import(`./content.js?t=${Date.now()}`)]);
+  if (!res.ok) throw new Error('Không đọc được nội dung. Bạn mở trang này bằng mo-quan-ly.bat chưa?');
+  data = await res.json();
+  saved = JSON.stringify(data);
+  for (const g of content.GALLERIES) for (const it of g.items) if (it.goc) thumbs.set(it.goc, it.src);
+  render();
+}
+
+function setMsg(kind, text) { const m = $('msg'); m.className = kind; m.textContent = text; }
+
+function refreshState() {
+  const d = dirty();
+  $('save').disabled = !d || busy;
+  $('state').textContent = busy ? 'Đang cập nhật…' : d ? '● Có thay đổi chưa lưu' : 'Đã lưu';
+}
+
+function render() {
+  const tabs = $('tabs');
+  tabs.replaceChildren(...data.galleries.map((g, gi) => {
+    const cap = capacity(g.id);
+    const b = el('button', { className: `tab${gi === current ? ' on' : ''}${g.items.length >= cap ? ' full' : ''}` },
+      `Gian ${gi + 1}`, el('span', { className: 'n', textContent: `${g.items.length}/${cap}` }));
+    b.onclick = () => { current = gi; render(); };
+    return b;
+  }));
+  renderRoom();
+  refreshState();
+}
+
+function renderRoom() {
+  const g = data.galleries[current], gi = current, cap = capacity(g.id);
+  const name = el('input', { type: 'text', value: g.name });
+  name.oninput = () => { g.name = name.value; refreshState(); };
+  const head = el('div', { className: 'room-head' },
+    el('label', {}, el('span', { textContent: `Tên Gian ${gi + 1}` }), name),
+    el('div', { className: 'count', innerHTML: `<b>${g.items.length}</b> / ${cap} ảnh (giới hạn theo chỗ trống trên tường)` }));
+  const parts = [head];
+  g.items.forEach((it, i) => parts.push(itemCard(g, it, i)));
+  const add = el('button', { className: 'add' });
+  if (g.items.length >= cap) { add.disabled = true; add.textContent = `Gian đã đủ ${cap}/${cap} ảnh. Xóa bớt một ảnh để thêm ảnh mới.`; }
+  else { add.textContent = `+ Thêm ảnh (còn ${cap - g.items.length} chỗ)`; add.onclick = () => pickImage(g, null); }
+  parts.push(add);
+  $('room').replaceChildren(...parts);
+}
+
+function itemCard(g, it, i) {
+  const src = thumbs.get(it.image);
+  const isPdf = /\.pdf$/i.test(it.image);
+  const pic = src ? el('img', { src, alt: it.title || `Ảnh ${i + 1}`, loading: 'lazy' })
+    : el('div', { className: 'ph', textContent: isPdf ? 'File PDF (trang 1 hiện sau khi lưu)' : 'Ảnh mới (hiện sau khi lưu)' });
+  const btn = (text, title, fn, cls = '') => { const b = el('button', { textContent: text, title, className: cls }); b.onclick = fn; return b; };
+  const move = (d) => { const j = i + d; [g.items[i], g.items[j]] = [g.items[j], g.items[i]]; renderRoom(); refreshState(); };
+  const up = btn('↑', 'Chuyển lên', () => move(-1)); up.disabled = i === 0;
+  const down = btn('↓', 'Chuyển xuống', () => move(1)); down.disabled = i === g.items.length - 1;
+  const left = el('div', { className: 'pic' },
+    el('div', { className: 'no', textContent: `Ảnh ${i + 1}` }), pic,
+    el('div', { className: 'row' }, up, down, btn('Đổi ảnh', 'Thay bằng ảnh khác, giữ chữ', () => pickImage(g, i)),
+      btn('Xóa', 'Xóa ảnh này khỏi gian', () => {
+        if (!confirmDelete(it, i)) return;
+        g.items.splice(i, 1); render();
+      }, 'del')));
+  const card = el('div', { className: 'item' }, left);
+
+  const plaqueT = el('div', { className: 't', textContent: it.title || '' });
+  const plaqueC = el('div', { className: 'c' });
+  const plaque = el('div', { className: 'plaque' }, plaqueT, plaqueC);
+  const showPlaque = () => {
+    plaqueT.textContent = it.title || ''; plaqueC.textContent = it.credit ? `(${it.credit})` : '';
+    plaque.classList.toggle('none', !it.title?.trim() && !it.credit?.trim());
+  };
+  showPlaque();
+  const field = (label, key, hint) => {
+    const inp = el('input', { type: 'text', value: it[key] || '' });
+    inp.oninput = () => { it[key] = inp.value; showPlaque(); refreshState(); };
+    return el('label', {}, el('span', { textContent: label }), inp, hint ? el('div', { className: 'hint', textContent: hint }) : '');
+  };
+  const area = (label, key) => {
+    const t = el('textarea', { value: joinParas(it[key]) });
+    t.oninput = () => { it[key] = paras(t.value); refreshState(); };
+    return el('label', {}, el('span', { textContent: label }), t);
+  };
+  card.append(el('div', { className: 'fields' },
+    plaque,
+    el('div', { className: 'two' },
+      field('Tên ảnh', 'title'),
+      field('Nguồn ảnh', 'credit', 'Hiện dưới tên ảnh, chữ nhỏ, trong ngoặc ( ). Để trống nếu không có.')),
+    el('div', { className: 'two' }, area('Lời giới thiệu tiếng Việt', 'vi'), area('English', 'en')),
+    el('div', { className: 'hint', textContent: 'Ô nào để trống thì bảo tàng không hiện ô đó. Muốn tách đoạn thì để một dòng trống giữa hai đoạn. Giọng đọc tự làm lại khi lưu.' })));
+  return card;
+}
+
+function confirmDelete(it, i) {
+  // Inline confirm without a browser dialog: the button asks once more.
+  const key = `${it.image}#${i}`;
+  if (confirmDelete.pending === key) { confirmDelete.pending = null; return true; }
+  confirmDelete.pending = key;
+  setMsg('busy', `Bấm "Xóa" thêm một lần nữa để xóa ảnh ${i + 1}${it.title ? ` (${it.title})` : ''}.`);
+  setTimeout(() => { if (confirmDelete.pending === key) { confirmDelete.pending = null; $('msg').className = ''; } }, 5000);
+  return false;
+}
+
+function pickImage(g, index) { pickFor = { g, index }; $('file').value = ''; $('file').click(); }
+
+$('file').onchange = async () => {
+  const f = $('file').files[0];
+  if (!f || !pickFor) return;
+  const { g, index } = pickFor; pickFor = null;
+  if (index === null && g.items.length >= capacity(g.id)) return setMsg('err', 'Gian đã đủ ảnh.');
+  setMsg('busy', `Đang tải ảnh ${f.name} lên…`);
+  try {
+    const res = await api(`/api/anh?gian=${g.id}&ten=${encodeURIComponent(f.name)}`, { method: 'POST', body: f });
+    const out = await res.json();
+    if (!res.ok) throw new Error(out.error);
+    if (!/\.pdf$/i.test(f.name)) thumbs.set(out.image, URL.createObjectURL(f));
+    if (index === null) {
+      g.items.push({ image: out.image, title: '', credit: '', vi: [], en: [] });
+      setMsg('ok', 'Đã thêm ảnh ở cuối gian. Điền tên, nguồn, lời giới thiệu rồi bấm Lưu.');
+    } else {
+      g.items[index].image = out.image;
+      setMsg('ok', `Đã thay ảnh ${index + 1}. Bấm Lưu để cập nhật bảo tàng.`);
+    }
+    render();
+    if (index === null) window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  } catch (e) { setMsg('err', `Không tải được ảnh: ${e.message}`); }
+};
+
+$('save').onclick = async () => {
+  busy = true; refreshState();
+  setMsg('busy', 'Đang lưu và cập nhật bảo tàng (ảnh, giọng đọc). Có đoạn chữ mới thì mất khoảng 1–3 phút, đừng đóng trang…');
+  $('log').hidden = true;
+  try {
+    const res = await api('/api/luu', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    const out = await res.json();
+    if (!res.ok) throw new Error(out.error);
+    saved = JSON.stringify(data);
+    $('log').textContent = out.log; $('log').hidden = false;
+    if (out.ok) setMsg('ok', `Đã lưu. Mở lại (F5) trang bảo tàng để xem. Bản cũ được giữ ở ${out.backup}.`);
+    else setMsg('err', 'Đã lưu chữ, nhưng có ảnh hoặc giọng đọc bị lỗi. Xem chi tiết bên dưới.');
+    const content = await import(`./content.js?t=${Date.now()}`);
+    for (const g of content.GALLERIES) for (const it of g.items) if (it.goc) thumbs.set(it.goc, it.src);
+  } catch (e) { setMsg('err', `Chưa lưu được: ${e.message}`); }
+  busy = false; render();
+};
+
+window.addEventListener('beforeunload', (ev) => { if (dirty()) { ev.preventDefault(); ev.returnValue = ''; } });
+
+const start = () => load().catch((e) => { setMsg('err', e.message); $('state').textContent = 'Lỗi'; });
+fetch('/api/toi').then(async (res) => {
+  if (res.ok) { showUser((await res.json()).user); return start(); }
+  if (res.status === 401) { $('state').textContent = 'Chưa đăng nhập'; return askLogin('', start); }
+  throw new Error('Server không có phần quản lý. Đóng các cửa sổ đen cũ rồi mở lại mo-quan-ly.bat.');
+}).catch((e) => { setMsg('err', e.message); $('state').textContent = 'Lỗi'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Bảo tàng số Chiến thắng Đăk Tô – Tân Cảnh</title>
+<style>
+  :root { --ink:#f6efe3; --panel:rgba(28,22,18,.82); --accent:#d6b06a; --line:rgba(214,176,106,.38); }
+  * { box-sizing:border-box; }
+  html, body { margin:0; height:100%; overflow:hidden; background:#1c1612; font-family:'Segoe UI', system-ui, sans-serif; color:var(--ink); }
+  button { font:inherit; color:inherit; }
+  #scene { display:block; width:100vw; height:100vh; touch-action:none; cursor:grab; }
+  .panel { position:fixed; background:var(--panel); backdrop-filter:blur(6px); border:1px solid var(--line); border-radius:10px; }
+  .btn { border:1px solid rgba(214,176,106,.55); background:transparent; border-radius:8px; cursor:pointer; }
+  .btn:hover { background:rgba(214,176,106,.18); }
+  .btn.primary { background:var(--accent); color:#1c1612; border-color:var(--accent); font-weight:600; }
+  .btn.primary:hover { background:#e3c181; }
+
+  #hud { top:16px; left:16px; padding:10px 12px 10px 14px; max-width:min(440px, calc(100vw - 32px)); display:flex; gap:12px; align-items:flex-start; }
+  #hud .text { flex:1; min-width:0; }
+  #hud h1 { margin:0; font:600 16px/1.3 'Times New Roman', serif; letter-spacing:.03em; color:var(--accent); }
+  #hud-room { margin-top:3px; font-size:13px; }
+  #hud-room b { color:var(--accent); font-weight:600; }
+  #hud .tools { display:flex; gap:6px; flex:none; }
+  #hud .tools .btn { width:34px; height:34px; font-size:16px; }
+  #map-toggle { display:none; }
+
+  #map-wrap { bottom:16px; left:16px; padding:8px; width:268px; }
+  #map-wrap .cap { font-size:11.5px; opacity:.85; margin:0 2px 6px; display:flex; justify-content:space-between; }
+  #map { display:block; width:250px; height:150px; cursor:pointer; }
+
+  #tour { bottom:16px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:10px; padding:8px 10px; width:min(600px, calc(100vw - 32px)); }
+  #tour .btn { flex:none; width:42px; height:42px; font-size:20px; }
+  #tour .text { flex:1; min-width:0; }
+  #tour-label { font-weight:600; font-size:14px; color:var(--accent); }
+  #tour-desc { font-size:12.5px; opacity:.9; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-height:1.2em; }
+
+  #info { top:16px; right:16px; width:min(410px, calc(100vw - 32px)); max-height:calc(100vh - 120px); overflow:auto; padding:14px 16px 16px; }
+  #info-kicker { font-size:12px; letter-spacing:.04em; text-transform:uppercase; opacity:.75; margin-right:30px; }
+  #info h2 { margin:4px 30px 8px 0; font:600 20px/1.3 'Times New Roman', serif; color:var(--accent); }
+  #info h2:empty { display:none; }
+  #info-body p { margin:0 0 10px; font-size:14.5px; line-height:1.6; }
+  #info-body .en { border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
+  #info-body .en:first-child, #info-body .credit + .en { border-top:0; margin-top:0; padding-top:0; }
+  #info-body .lang { display:flex; align-items:center; gap:8px; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+  #info-body .speak { display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border:1px solid rgba(214,176,106,.55); border-radius:50%; background:transparent; font-size:16px; line-height:1; cursor:pointer; padding:0; }
+  #info-body .speak:hover { background:rgba(214,176,106,.18); }
+  #info-body .speak .off, #info-body .speak.playing .on { display:none; }
+  #info-body .speak.playing .off { display:inline; }
+  #info-body .speak.playing { border-color:var(--accent); animation:speak-pulse 1.2s ease-in-out infinite; }
+  @keyframes speak-pulse { 50% { box-shadow:0 0 0 5px rgba(214,176,106,.25); } }
+  #info-body .en p { font-style:italic; opacity:.9; }
+  #info-body .credit { font-size:12.5px; opacity:.75; margin:-4px 0 12px; }
+  #info-zoom { margin-top:4px; padding:8px 12px; }
+  #info-close { position:absolute; top:8px; right:8px; width:30px; height:30px; border:0; border-radius:6px; background:transparent; font-size:20px; cursor:pointer; }
+
+  #viewer { position:fixed; inset:0; z-index:20; background:rgba(10,8,6,.94); display:flex; align-items:center; justify-content:center; padding:56px 16px 16px; }
+  #viewer[hidden] { display:none; }
+  #viewer img { max-width:100%; max-height:100%; object-fit:contain; box-shadow:0 10px 40px rgba(0,0,0,.6); }
+  #viewer-close { position:absolute; top:12px; right:12px; width:40px; height:40px; font-size:22px; }
+
+  #welcome { position:fixed; inset:0; z-index:15; display:flex; align-items:center; justify-content:center; padding:16px; background:rgba(16,12,10,.72); }
+  #welcome[hidden] { display:none; }
+  #welcome .card { position:relative; width:min(680px, 100%); max-height:calc(100vh - 32px); overflow:auto; padding:24px 26px; }
+  #welcome .eyebrow { font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  #welcome h2 { margin:6px 0 4px; font:600 27px/1.25 'Times New Roman', serif; }
+  #welcome .sub { margin:0 0 18px; opacity:.8; font-size:14px; }
+  #welcome h3 { margin:16px 0 8px; font-size:13px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  #welcome ol { margin:0; padding:0; list-style:none; display:grid; gap:6px; }
+  #welcome ol li { display:flex; gap:10px; align-items:baseline; font-size:14.5px; }
+  #welcome ol .n { flex:none; width:24px; height:24px; border-radius:50%; background:var(--accent); color:#1c1612; font-weight:700; font-size:13px; display:inline-flex; align-items:center; justify-content:center; }
+  #welcome ol .c { opacity:.7; font-size:12.5px; }
+  #welcome .how { display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; font-size:13.5px; line-height:1.5; }
+  #welcome .how div b { color:var(--accent); display:block; font-size:12.5px; letter-spacing:.04em; }
+  #welcome .how ul { margin:4px 0 0; padding-left:18px; }
+  /* pinned to the bottom of the card so the buttons stay visible on a short (landscape) screen */
+  #welcome .actions { display:flex; gap:10px; flex-wrap:wrap; position:sticky; bottom:-24px; margin:20px -26px -24px; padding:12px 26px 16px; background:#231b16; border-top:1px solid var(--line); border-radius:0 0 10px 10px; }
+  #welcome .actions .btn { padding:11px 18px; font-size:15px; }
+  #welcome-close { position:absolute; top:10px; right:10px; width:32px; height:32px; border:0; background:transparent; font-size:20px; cursor:pointer; }
+
+  #loading { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; background:#1c1612; transition:opacity .6s; z-index:30; text-align:center; padding:16px; }
+  #loading.done { opacity:0; pointer-events:none; }
+  #loading .track { width:min(320px, 70vw); height:4px; background:rgba(255,255,255,.12); border-radius:2px; overflow:hidden; }
+  #loading-bar { height:100%; width:0; background:var(--accent); transition:width .2s; }
+
+  /* walking pad, on every device: left thumb walks, right thumb drags to look, as in mobile games.
+     On a wide screen it sits above the map in the bottom-left corner. */
+  #pad { position:fixed; left:16px; bottom:222px; z-index:5; display:grid; grid-template-columns:repeat(3, 50px); grid-template-rows:repeat(2, 50px); gap:6px; touch-action:none; user-select:none; -webkit-user-select:none; }
+  #pad button { border-radius:12px; border:1px solid rgba(214,176,106,.6); background:rgba(28,22,18,.72); font-size:20px; touch-action:none; -webkit-tap-highlight-color:transparent; }
+  #pad button.on { background:rgba(214,176,106,.55); }
+  #pad .up { grid-column:2; grid-row:1; }
+  #pad .left { grid-column:1; grid-row:2; }
+  #pad .down { grid-column:2; grid-row:2; }
+  #pad .right { grid-column:3; grid-row:2; }
+  #pad button:hover { background:rgba(214,176,106,.25); }
+
+  @media (max-width:900px) {
+    #pad { bottom:84px; }
+    #map-toggle { display:inline-block; }
+    #map-wrap { display:none; bottom:auto; top:84px; }
+    body.show-map #map-wrap { display:block; }
+    #info { top:auto; bottom:84px; max-height:52vh; }
+  }
+  /* phone held upright: the description sits above the walking pad instead of covering it */
+  @media (max-width:900px) and (orientation:portrait) {
+    #info { bottom:198px; max-height:calc(100vh - 290px); }
+  }
+  /* phone held sideways: low screen, so panels go to the sides and the map folds into its button */
+  @media (max-height:500px) and (orientation:landscape) {
+    #map-toggle { display:inline-block; }
+    #map-wrap { display:none; top:64px; bottom:auto; left:12px; }
+    body.show-map #map-wrap { display:block; }
+    #hud { top:8px; left:12px; padding:6px 8px 6px 10px; }
+    #hud h1 { font-size:13px; }
+    #hud-room { font-size:12px; }
+    #hud .tools .btn { width:30px; height:30px; }
+    #info { top:8px; bottom:auto; right:12px; width:min(330px, 42vw); max-height:calc(100vh - 82px); padding:12px 14px; }
+    #info h2 { font-size:17px; }
+    #info-body p { font-size:13.5px; line-height:1.5; }
+    #tour { left:auto; right:12px; bottom:8px; transform:none; width:min(460px, calc(100vw - 220px)); padding:6px 8px; }
+    #tour .btn { width:38px; height:38px; }
+    #pad { left:12px; bottom:8px; }
+    #welcome { padding:8px; }
+    #welcome .card { max-height:calc(100vh - 16px); padding:16px 20px; }
+    #welcome .actions { bottom:-16px; margin:14px -20px -16px; padding:10px 20px 12px; }
+    #welcome h2 { font-size:21px; }
+  }
+  @media (max-width:560px) {
+    #welcome .how { grid-template-columns:1fr; }
+    #welcome h2 { font-size:22px; }
+    #hud h1 { font-size:14px; }
+  }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./lib/three/build/three.module.js", "three/addons/": "./lib/three/examples/jsm/" } }
+</script>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="hud" class="panel">
+  <div class="text">
+    <h1 id="hud-title"></h1>
+    <div id="hud-room"></div>
+  </div>
+  <div class="tools">
+    <button id="map-toggle" class="btn" aria-label="Bản đồ" title="Bản đồ">▦</button>
+    <button id="help-btn" class="btn" aria-label="Hướng dẫn tham quan" title="Hướng dẫn tham quan">?</button>
+  </div>
+</div>
+
+<div id="map-wrap" class="panel">
+  <div class="cap"><span>Sơ đồ · bấm vào gian để tới</span><span>● bạn</span></div>
+  <canvas id="map"></canvas>
+</div>
+
+<div id="info" class="panel" hidden>
+  <button id="info-close" aria-label="Đóng">×</button>
+  <div id="info-kicker"></div>
+  <h2 id="info-title"></h2>
+  <div id="info-body"></div>
+  <button id="info-zoom" class="btn">⤢ Xem ảnh lớn</button>
+</div>
+
+<div id="tour" class="panel">
+  <button id="tour-prev" class="btn" aria-label="Điểm trước">‹</button>
+  <div class="text"><div id="tour-label"></div><div id="tour-desc"></div></div>
+  <button id="tour-next" class="btn" aria-label="Điểm tiếp">›</button>
+</div>
+
+<div id="pad" aria-label="Nút đi lại">
+  <button class="up" data-key="KeyW" aria-label="Đi tới">▲</button>
+  <button class="left" data-key="ArrowLeft" aria-label="Quay trái">◀</button>
+  <button class="down" data-key="KeyS" aria-label="Lùi lại">▼</button>
+  <button class="right" data-key="ArrowRight" aria-label="Quay phải">▶</button>
+</div>
+
+<div id="viewer" hidden>
+  <img id="viewer-img" alt="">
+  <button id="viewer-close" class="btn" aria-label="Đóng">×</button>
+</div>
+
+<div id="welcome" hidden>
+  <div class="card panel">
+    <button id="welcome-close" aria-label="Đóng">×</button>
+    <div class="eyebrow">Hướng dẫn tham quan</div>
+    <h2 id="welcome-title"></h2>
+    <p class="sub" id="welcome-sub"></p>
+
+    <h3>Lộ trình</h3>
+    <ol id="welcome-route"></ol>
+
+    <h3>Cách tham quan</h3>
+    <div class="how">
+      <div><b>MÁY TÍNH</b>
+        <ul>
+          <li>Kéo chuột để nhìn xung quanh</li>
+          <li>W A S D hoặc phím mũi tên để đi</li>
+          <li>Bấm xuống sàn để đi tới chỗ đó</li>
+          <li>Bấm vào bức ảnh để đọc lời giới thiệu</li>
+          <li>Hoặc giữ nút ▲ ▼ ◀ ▶ ở góc trái để đi và quay</li>
+        </ul>
+      </div>
+      <div><b>ĐIỆN THOẠI</b>
+        <ul>
+          <li>Vuốt màn hình để nhìn xung quanh</li>
+          <li>Chạm xuống sàn để đi tới chỗ đó</li>
+          <li>Chạm vào bức ảnh để đọc lời giới thiệu</li>
+          <li>Giữ nút ▲ ▼ ◀ ▶ ở góc trái để đi và quay</li>
+        </ul>
+      </div>
+      <div><b>DẪN ĐƯỜNG</b>
+        <ul>
+          <li>Đi theo <span style="color:var(--accent)">mũi tên vàng</span> trên sàn</li>
+          <li>Biển trên cửa ghi gian tiếp theo</li>
+          <li>Bản đồ ở góc màn hình: bấm vào gian để tới</li>
+        </ul>
+      </div>
+      <div><b>THAM QUAN TỰ ĐỘNG</b>
+        <ul>
+          <li>Bấm ‹ › ở thanh dưới để đi lần lượt từng ảnh</li>
+          <li>Bấm “⤢ Xem ảnh lớn” để phóng to</li>
+          <li>Bấm nút ? để mở lại hướng dẫn này</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="start-tour" class="btn primary">Bắt đầu tham quan có dẫn đường ›</button>
+      <button id="free-roam" class="btn">Tự do khám phá</button>
+    </div>
+  </div>
+</div>
+
+<div id="loading">
+  <div id="loading-title" style="font:600 20px 'Times New Roman',serif;letter-spacing:.06em;color:#d6b06a">ĐANG MỞ CỬA BẢO TÀNG…</div>
+  <div class="track"><div id="loading-bar"></div></div>
+</div>
+
+<script type="module" src="./museum.js"></script>
+</body>
+</html>

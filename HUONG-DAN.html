@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn làm bảo tàng số 3D</title>
+<style>
+  :root { --bg:#faf7f2; --ink:#2b2118; --muted:#6b5d50; --line:#e4dccf; --card:#fff; --accent:#8a5a2b; --accent-bg:#f3e8d8; --code:#f4efe7; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1c1612; --ink:#f3ece2; --muted:#b9ab9a; --line:#3a3029; --card:#251d18; --accent:#d6b06a; --accent-bg:#3a2d20; --code:#2c231d; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.65 'Segoe UI', system-ui, sans-serif; }
+  .wrap { max-width:900px; margin:0 auto; padding:32px 16px 80px; }
+  h1 { font:600 32px/1.25 'Times New Roman', serif; margin:0 0 6px; }
+  .lead { color:var(--muted); margin:0 0 22px; }
+  h2 { font:600 24px/1.3 'Times New Roman', serif; margin:44px 0 12px; padding-top:12px; border-top:1px solid var(--line); color:var(--accent); }
+  h3 { font-size:17px; margin:24px 0 8px; }
+  nav.toc { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px; }
+  nav.toc ol { margin:6px 0 0; padding-left:22px; columns:2; column-gap:28px; }
+  nav.toc a { color:var(--ink); }
+  table { width:100%; border-collapse:collapse; margin:10px 0 16px; font-size:14.5px; background:var(--card); }
+  th, td { text-align:left; vertical-align:top; padding:8px 10px; border:1px solid var(--line); }
+  th { background:var(--accent-bg); }
+  code { background:var(--code); padding:1px 5px; border-radius:4px; font:13.5px Consolas, 'Cascadia Mono', monospace; }
+  pre { background:var(--code); border:1px solid var(--line); border-radius:8px; padding:12px 14px; overflow:auto; font:13.5px/1.55 Consolas, 'Cascadia Mono', monospace; white-space:pre-wrap; }
+  .tip { background:var(--accent-bg); border-left:4px solid var(--accent); padding:10px 14px; border-radius:0 8px 8px 0; margin:12px 0; }
+  .prompt { position:relative; background:var(--card); border:1px solid var(--line); border-radius:10px; margin:14px 0 20px; }
+  .prompt .head { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:10px 14px; border-bottom:1px solid var(--line); font-weight:600; }
+  .prompt pre { margin:0; border:0; border-radius:0 0 10px 10px; }
+  .copy { flex:none; border:1px solid var(--accent); color:var(--accent); background:transparent; border-radius:6px; padding:4px 10px; cursor:pointer; font:inherit; font-size:13px; }
+  .copy:hover { background:var(--accent-bg); }
+  .tree { line-height:1.5; }
+  ol.steps > li { margin-bottom:8px; }
+  .muted { color:var(--muted); font-size:14px; }
+  @media (max-width:600px) { nav.toc ol { columns:1; } h1 { font-size:26px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Hướng dẫn làm bảo tàng số 3D</h1>
+<p class="lead">Viết cho người không rành kỹ thuật. Đọc xong sẽ biết bảo tàng "Chiến thắng Đăk Tô – Tân Cảnh" được làm bằng gì, mỗi file làm việc gì, cách sửa nội dung, và cách nhờ AI làm một bảo tàng tương tự (có prompt mẫu để chép).</p>
+
+<nav class="toc"><b>Mục lục</b>
+<ol>
+  <li><a href="#tong-quan">Bảo tàng này là gì</a></li>
+  <li><a href="#cong-nghe">Công nghệ dùng</a></li>
+  <li><a href="#source">Các file trong thư mục</a></li>
+  <li><a href="#chay">Mở bảo tàng trên máy</a></li>
+  <li><a href="#sua">Sửa nội dung, thêm ảnh</a></li>
+  <li><a href="#hoat-dong">Bên trong hoạt động thế nào</a></li>
+  <li><a href="#lam-moi">Làm một bảo tàng mới từ đầu</a></li>
+  <li><a href="#prompt">Prompt mẫu cho AI</a></li>
+  <li><a href="#dua-len-mang">Đưa lên mạng</a></li>
+  <li><a href="#loi">Lỗi thường gặp</a></li>
+  <li><a href="#con-mo">Việc còn dang dở</a></li>
+</ol></nav>
+
+<h2 id="tong-quan">1. Bảo tàng này là gì</h2>
+<p>Một trang web mở bằng trình duyệt (Chrome, Edge…). Người xem đi trong một tòa nhà 3D giống trò chơi: một <b>sảnh chính</b> và <b>4 gian trưng bày</b>, tường treo <b>48 bức ảnh</b>. Không cần cài phần mềm, không cần tài khoản.</p>
+<table>
+  <tr><th>Gian</th><th>Nội dung</th><th>Thuyết minh</th></tr>
+  <tr><td>Sảnh chính</td><td>Tên bảo tàng, sơ đồ tham quan</td><td>–</td></tr>
+  <tr><td>Gian 1 · Căn cứ thép bên dòng Pô Kô</td><td>9 ảnh</td><td>Việt + Anh</td></tr>
+  <tr><td>Gian 2 · Những ngày đêm khói lửa</td><td>13 ảnh</td><td>Việt + Anh</td></tr>
+  <tr><td>Gian 3 · Tri ân</td><td>14 ảnh (có 1 trang Quyết định lấy từ PDF)</td><td>Việt + Anh</td></tr>
+  <tr><td>Gian 4 · Đăk Tô ngày mới</td><td>12 ảnh</td><td>Chưa có (điền thêm được trên trang quản lý)</td></tr>
+</table>
+<p><b>Phần hướng dẫn khách</b> có sẵn trong bảo tàng:</p>
+<ul>
+  <li>Màn chào lúc mới vào: lộ trình và cách đi lại.</li>
+  <li>Mũi tên vàng trên sàn chỉ đường.</li>
+  <li>Biển trên cửa ghi "TIẾP THEO → Gian…".</li>
+  <li>Tên gian treo trên tường.</li>
+  <li>Bản đồ nhỏ có chấm đỏ "bạn đang ở đây".</li>
+  <li>Thanh ‹ › để đi lần lượt từng ảnh.</li>
+  <li>Cụm nút ▲ ▼ ◀ ▶ để tự đi.</li>
+  <li>Nút ? để mở lại hướng dẫn.</li>
+</ul>
+
+<h2 id="cong-nghe">2. Công nghệ dùng</h2>
+<table>
+  <tr><th>Thành phần</th><th>Là gì (nói dễ hiểu)</th><th>Dùng để làm gì</th></tr>
+  <tr><td><b>HTML, CSS, JavaScript</b></td><td>Ba "ngôn ngữ" của mọi trang web: HTML là khung, CSS là trang trí, JavaScript là phần chạy/điều khiển</td><td>Giao diện: màn chào, bảng thuyết minh, nút bấm, bản đồ</td></tr>
+  <tr><td><b>three.js</b> (bản 0.160)</td><td>Thư viện miễn phí giúp vẽ 3D trong trình duyệt. Đã chép sẵn vào thư mục <code>lib\</code>, không cần mạng</td><td>Dựng tường, sàn, đèn, khung tranh, camera đi lại</td></tr>
+  <tr><td><b>Python</b> + <b>Pillow</b></td><td>Python là ngôn ngữ lập trình, Pillow là thư viện xử lý ảnh của nó</td><td>Chạy 1 lần để đổi ảnh sang JPG gọn nhẹ và lấy chữ từ file Word ra</td></tr>
+  <tr><td><b>Poly Haven</b></td><td>Kho chất liệu 3D miễn phí (giấy phép CC0, dùng tự do)</td><td>Vân sàn gỗ, sàn đá, tường vữa, cột đá, chậu cây, ánh sáng môi trường</td></tr>
+  <tr><td><b>Server nhỏ</b> (<code>tools\server.py</code>)</td><td>Chương trình "phát" các file cho trình duyệt</td><td>Trình duyệt không cho trang 3D đọc file trực tiếp từ ổ đĩa, nên cần một server, dù chỉ chạy trên máy mình</td></tr>
+  <tr><td><b>Claude Code</b> (AI)</td><td>Trợ lý AI viết code theo yêu cầu bằng lời</td><td>Toàn bộ code bảo tàng này do AI viết theo yêu cầu, người làm chỉ chuẩn bị ảnh và lời giới thiệu</td></tr>
+</table>
+<div class="tip">Không dùng nền tảng có sẵn (như Artsteps) vì Artsteps đã ngừng nhận đăng ký mới, phải chuyển sang bản trả phí. Tự làm thì miễn phí, toàn quyền sửa, và đưa lên mạng cũng miễn phí (xem mục 9).</div>
+
+<h2 id="source">3. Các file trong thư mục</h2>
+<p>Thư mục: <code>Desktop\baotang3d\bao-tang-dak-to\</code></p>
+<pre class="tree">bao-tang-dak-to\
+├─ mo-bao-tang.bat        ← BẤM ĐÚP để mở bảo tàng
+├─ mo-quan-ly.bat         ← BẤM ĐÚP để mở trang quản lý (sửa ảnh, tên ảnh, nguồn, lời giới thiệu)
+├─ index.html             ← trang web: màn chào, bảng thuyết minh, nút bấm, kiểu chữ/màu
+├─ quan-ly.html           ← trang quản lý
+├─ museum.js              ← phần 3D: treo ảnh, đèn, đi lại, tham quan tự động, bản đồ, nút loa
+├─ layout.js              ← sơ đồ phòng, chỗ treo ảnh, số ảnh tối đa mỗi gian
+├─ noi-dung.json          ← NỘI DUNG GỐC: ảnh, tên, nguồn, lời giới thiệu (trang quản lý ghi vào đây)
+├─ content.js             ← bản để bảo tàng đọc (TỰ TẠO từ noi-dung.json, không sửa tay)
+├─ HUONG-DAN.html         ← file bạn đang đọc
+├─ nguon-anh\g1..g4\      ← ảnh gốc (kể cả ảnh tải lên từ trang quản lý)
+├─ sao-luu\               ← bản noi-dung.json cũ, tự giữ lại mỗi lần bấm Lưu
+├─ tools\
+│  ├─ build_content.py    ← script: noi-dung.json → ảnh JPG + giọng đọc + content.js
+│  ├─ nhap_tu_word.py     ← đã chạy 1 lần (25/11/2026): chép chữ từ Word sang noi-dung.json
+│  └─ server.py           ← server nhỏ chạy ở http://localhost:8766 (kèm phần lưu của trang quản lý)
+├─ assets\
+│  ├─ tranh\g1..g4\       ← ảnh đã xử lý: …jpg (treo tường), …-lon.jpg (phóng to)
+│  ├─ giong\              ← giọng đọc mp3 (vi-… tiếng Việt, en-… tiếng Anh)
+│  ├─ textures\           ← vân sàn, tường, đá (Poly Haven)
+│  ├─ models\             ← mô hình chậu cây 3D
+│  └─ hdri\               ← ảnh ánh sáng môi trường
+├─ lib\three\             ← thư viện three.js
+└─ anh-chup\              ← ảnh chụp màn hình lúc kiểm tra</pre>
+<p><b>Tư liệu gốc ban đầu</b> (ảnh + file Word) nằm ở <code>Desktop\baotang3d\BẢO TÀNG SỐ 4.0\BẢO TÀNG SỐ 4.0\GIAN 1…4</code>. Ngày 25/11/2026 chữ trong Word đã được chép sang <code>noi-dung.json</code>. Từ đó <b>sửa trên trang quản lý</b>; sửa Word sẽ không còn tác dụng. Thư mục Word giữ lại làm bản gốc.</p>
+
+<h2 id="chay">4. Mở bảo tàng trên máy</h2>
+<ol class="steps">
+  <li>Máy cần có <b>Python</b> (tải ở python.org, lúc cài nhớ tích "Add Python to PATH").</li>
+  <li>Bấm đúp <code>mo-bao-tang.bat</code>. Một cửa sổ đen hiện ra, trình duyệt tự mở <code>http://localhost:8766/</code>.</li>
+  <li>Muốn tắt bảo tàng thì đóng cửa sổ đen.</li>
+</ol>
+<div class="tip"><code>localhost</code> nghĩa là "chính máy này": chỉ máy tính đó xem được. Muốn người khác hoặc điện thoại xem được thì phải đưa lên mạng (mục 9).</div>
+
+<h2 id="sua">5. Sửa nội dung, thêm ảnh</h2>
+<h3>Tài khoản đăng nhập trang quản lý</h3>
+<ol class="steps">
+  <li>Bấm đúp <code>tao-mat-khau.bat</code>, gõ mật khẩu 2 lần (chữ không hiện ra; nên dài ít nhất 8 ký tự). Máy in ra một mã md5 dài 32 ký tự.</li>
+  <li>Mở <code>tools\tai-khoan.json</code> bằng Notepad, điền tên đăng nhập vào <code>"user"</code> và mã vừa in vào <code>"md5"</code>. Muốn nhiều người thì thêm dòng: <pre>{ "user": "giaovien1", "md5": "…" },
+{ "user": "giaovien2", "md5": "…" }</pre></li>
+  <li>Lưu file. Không cần mở lại server. Đăng nhập giữ được 8 tiếng; hết hạn giữa chừng thì trang hỏi lại mật khẩu mà không mất phần đang sửa.</li>
+</ol>
+<div class="tip">File tài khoản không bao giờ được server phát ra trình duyệt, và đã nằm trong <code>.gitignore</code> nên không bị đẩy lên GitHub. Quên mật khẩu thì tạo mã mới và thay vào là xong.</div>
+<h3>Dùng trang quản lý</h3>
+<ol class="steps">
+  <li>Bấm đúp <code>mo-quan-ly.bat</code>. Trình duyệt mở trang quản lý. (Nếu đang mở bảo tàng bằng <code>mo-bao-tang.bat</code> thì đóng cửa sổ đen đó trước, vì hai cái dùng chung cổng 8766.)</li>
+  <li>Chọn gian ở hàng nút trên cùng. Số bên cạnh, ví dụ <b>9/16</b>, là số ảnh hiện có trên số ảnh tối đa.</li>
+  <li>Mỗi ảnh có: <b>Tên ảnh</b>, <b>Nguồn ảnh</b> (hiện dưới tên, chữ nhỏ, trong ngoặc), <b>lời giới thiệu tiếng Việt</b> và <b>English</b>. Muốn tách đoạn thì để một dòng trống giữa hai đoạn. Khung nâu phía trên cho xem trước bảng tên dưới tranh.</li>
+  <li>Nút <b>↑ ↓</b> đổi thứ tự treo, <b>Đổi ảnh</b> thay ảnh nhưng giữ chữ, <b>Xóa</b> (bấm 2 lần) bỏ ảnh khỏi gian, <b>+ Thêm ảnh</b> thêm vào cuối gian.</li>
+  <li>Bấm <b>Lưu &amp; cập nhật bảo tàng</b>. Máy tự làm lại ảnh và giọng đọc cho phần đã đổi. Chỉ sửa ít chữ thì mất khoảng 10 giây, có nhiều đoạn chữ mới thì 1–3 phút. Cần có mạng để tạo giọng đọc.</li>
+  <li>Mở lại trang bảo tàng (F5) để xem.</li>
+</ol>
+<div class="tip"><b>Giới hạn ảnh mỗi gian</b> tính theo chỗ trống trên tường: mỗi ảnh có ít nhất 2,2 m tường. Hiện tại Gian 1: 16, Gian 2: 21, Gian 3: 21, Gian 4: 16. Gian đủ ảnh thì nút Thêm ảnh bị khóa. Con số nằm ở <code>MIN_SLOT</code> trong <code>layout.js</code>.</div>
+<div class="tip"><b>Lỡ sửa sai:</b> mỗi lần Lưu, bản cũ được giữ trong <code>sao-luu\</code>. Chép bản muốn lấy lại đè lên <code>noi-dung.json</code>, rồi chạy <code>python tools\build_content.py</code> (hoặc nhờ AI làm).</div>
+<div class="tip"><b>Ô để trống thì không hiện:</b> gian nào cũng điền được tên ảnh, nguồn, lời giới thiệu. Ảnh không có tên và nguồn thì không có bảng tên dưới tranh; không có lời giới thiệu thì không có phần chữ và nút loa. Gian 4 hiện chưa có chữ nên chỉ thấy ảnh.</div>
+<h3>Giọng đọc</h3>
+<p>Mỗi ảnh có nút 🔊 ở phần tiếng Việt và phần English. Giọng do Microsoft Edge TTS tạo, miễn phí: tiếng Việt là <b>HoaiMy</b> (nữ miền Bắc, chậm và trầm hơn một chút), tiếng Anh là <b>Sonia</b> (nữ, giọng Anh). Muốn đổi giọng thì sửa <code>VOICES</code> trong <code>tools\build_content.py</code> rồi chạy lại script.</p>
+<p>Máy đọc sai chữ viết tắt (ví dụ "70m" thành "70 mờ") thì <b>không cần sửa chữ hiển thị</b>. Trong <code>SPOKEN</code> của cùng file có bảng "viết thế này → đọc thế kia", chỉ dùng cho giọng đọc: hiện đã có m → mét, cm → xăng-ti-mét, 1.4 → 1,4. Thêm một dòng vào bảng đó rồi chạy lại script, máy chỉ đọc lại những đoạn bị ảnh hưởng.</p>
+<h3>Đổi tên bảo tàng</h3>
+<p>Tên bảo tàng: 2 dòng đầu file <code>museum.js</code> (<code>TITLE</code>, <code>SUBTITLE</code>) và dòng chữ trên tường sảnh (tìm "CHIẾN THẮNG ĐĂK TÔ"). Tên gian thì sửa trên trang quản lý.</p>
+
+<h2 id="hoat-dong">6. Bên trong hoạt động thế nào</h2>
+<ul>
+  <li><b>Sơ đồ nhà:</b> trong <code>museum.js</code>, mỗi phòng là một hình chữ nhật có tọa độ (đơn vị mét). Sảnh 16×12 m ở giữa phía nam, Gian 1 bên trái, Gian 2 và 3 phía bắc, Gian 4 bên phải. Cửa nối các phòng thành vòng: Sảnh → 1 → 2 → 3 → 4 → Sảnh.</li>
+  <li><b>Treo ảnh tự động:</b> chương trình đo các đoạn tường trống (trừ góc và cửa), chia đều cho số ảnh của gian, treo theo chiều kim đồng hồ bắt đầu từ cửa vào. Khung ảnh tự co theo tỉ lệ ảnh.</li>
+  <li><b>Đi lại:</b> kéo chuột / vuốt để nhìn; W A S D, phím mũi tên hoặc cụm nút ▲ ▼ ◀ ▶ để đi; bấm sàn để đi tới. Có kiểm tra va chạm nên không đi xuyên tường, ghế, cột.</li>
+  <li><b>Tham quan tự động:</b> danh sách "điểm dừng": sảnh → đầu mỗi gian → từng ảnh → kết thúc. Nút ‹ › đưa camera lướt tới điểm tiếp theo và mở thuyết minh.</li>
+  <li><b>Điện thoại:</b> giao diện tự sắp lại khi màn hình hẹp hoặc xoay ngang. Khi xem ảnh, camera tự lùi xa cho vừa khung.</li>
+  <li><b>Tải nhanh:</b> ảnh treo tường chỉ 1024 px (nhẹ cho điện thoại), bản 2048 px chỉ tải khi bấm "Xem ảnh lớn".</li>
+</ul>
+
+<h2 id="lam-moi">7. Làm một bảo tàng mới từ đầu</h2>
+<ol class="steps">
+  <li><b>Chuẩn bị tư liệu</b> (việc quan trọng nhất). Mỗi gian một thư mục <code>GIAN 1. Tên gian</code>. Trong đó đánh số ảnh <code>01. Tên ảnh.jpg</code> và file Word cùng số <code>01. Tên ảnh.docx</code>. Trong file Word viết đoạn tiếng Việt trước, tiếng Anh sau. Gian nào chỉ có ảnh thì không cần Word.</li>
+  <li><b>Cài công cụ:</b> Python; Claude Code (hoặc trợ lý AI viết code khác); Node.js nếu AI yêu cầu.</li>
+  <li><b>Nhờ AI dựng</b> theo các prompt ở mục 8, làm <b>từng bước</b>, xem kết quả rồi mới sang bước sau.</li>
+  <li><b>Kiểm tra:</b> tự đi hết các gian, bấm thử từng ảnh, thử trên điện thoại (sau khi đưa lên mạng).</li>
+  <li><b>Đưa lên mạng</b> (mục 9) và lấy đường link / mã QR gửi người xem.</li>
+</ol>
+<div class="tip"><b>Mẹo làm việc với AI:</b>
+<ul style="margin:6px 0 0">
+  <li>Mỗi lần chỉ yêu cầu một việc.</li>
+  <li>Nói rõ "giống như", ví dụ "nút đi lại bên trái như game điện thoại".</li>
+  <li>Bảo AI <b>tự chạy thử và chụp màn hình</b> cho mình xem.</li>
+  <li>Khi thấy sai, mô tả đúng điều mình thấy: "mình refresh vẫn không thấy nút", kèm ảnh chụp nếu được.</li>
+</ul></div>
+
+<h2 id="prompt">8. Prompt mẫu cho AI</h2>
+<p>Chép từng prompt (nút <b>Chép</b>), sửa chỗ trong ngoặc vuông <code>[…]</code> cho đúng bảo tàng của mình, rồi dán vào Claude Code. Làm lần lượt từ 1 đến 6.</p>
+
+<div class="prompt"><div class="head">Prompt 1 · Đọc tư liệu và lên kế hoạch<button class="copy">Chép</button></div>
+<pre>Mình muốn làm một bảo tàng số 3D chạy trên trình duyệt, tên "[Tên bảo tàng]".
+Tư liệu nằm ở thư mục [đường dẫn thư mục tư liệu]: mỗi gian một thư mục "GIAN n. Tên gian",
+mỗi ảnh có một file Word cùng số thứ tự chứa lời giới thiệu (tiếng Việt trước, tiếng Anh sau).
+Quy tắc:
+- Mỗi ảnh kèm lời giới thiệu lấy từ file Word của nó.
+- Riêng [Gian 4] chỉ trưng bày ảnh, không thuyết minh, không biển tên.
+- Ảnh nào không có Word vẫn treo, chỉ không có chữ.
+Hãy đọc hết thư mục, lập bảng: gian, ảnh, file Word ghép với ảnh đó.
+Chỉ ra chỗ nào lệch (ảnh thiếu Word, Word thiếu ảnh, số thứ tự trùng/nhảy, Word thiếu tiếng Anh)
+và hỏi mình trước khi tự ghép. Chưa viết code.</pre></div>
+
+<div class="prompt"><div class="head">Prompt 2 · Dựng bảo tàng 3D<button class="copy">Chép</button></div>
+<pre>Dựng bảo tàng bằng three.js (chép thư viện vào thư mục lib để chạy không cần mạng),
+HTML/CSS/JS thuần, không cần cài thêm gì ngoài Python.
+- Một sảnh chính (tên bảo tàng trên tường + bảng sơ đồ tham quan) và [4] gian nối thành vòng:
+  Sảnh → Gian 1 → … → Gian cuối → Sảnh.
+- Viết script Python (dùng Pillow) đọc thư mục tư liệu: đổi ảnh (kể cả .webp .avif .jfif, PDF scan
+  lấy trang 1) sang JPG 1024px để treo và 2048px để phóng to; lấy chữ trong Word, tách tiếng Việt / tiếng Anh;
+  ghi ra content.js. Có một bảng trong script ghép ảnh – Word – tên hiển thị để mình sửa được.
+- Treo ảnh tự động chia đều trên tường, tránh góc và cửa, khung ảnh co theo tỉ lệ ảnh,
+  biển tên nhỏ dưới mỗi ảnh (trừ gian chỉ có ảnh).
+- Bấm vào ảnh: camera lướt tới trước ảnh, hiện bảng lời giới thiệu (Việt, rồi Anh) và nút "Xem ảnh lớn".
+- Chất liệu sàn/tường lấy từ Poly Haven (CC0), có ánh sáng đẹp, ghế, chậu cây.
+- Đi lại: kéo chuột để nhìn, W A S D để đi, bấm sàn để đi tới, không đi xuyên tường.
+- Kèm file .bat bấm đúp để mở (server Python nhỏ, gửi header no-cache).
+Làm xong tự chạy thử trong trình duyệt, chụp màn hình sảnh và từng gian cho mình xem.</pre></div>
+
+<div class="prompt"><div class="head">Prompt 3 · Hướng dẫn cho khách tham quan<button class="copy">Chép</button></div>
+<pre>Thêm phần hướng dẫn để khách tham quan biết đường đi và cách dùng:
+- Màn chào khi mở trang: tên bảo tàng, lộ trình các gian (số ảnh mỗi gian), cách đi lại trên máy tính
+  và điện thoại; nút "Bắt đầu tham quan có dẫn đường" và "Tự do khám phá". Nút ? để mở lại.
+- Mũi tên vàng trên sàn theo lộ trình; biển trên mỗi cửa ghi "TIẾP THEO → Gian n · tên" / "← QUAY LẠI";
+  tên gian treo cao trên bức tường đối diện cửa vào.
+- Bản đồ nhỏ ở góc màn hình: chấm đỏ "bạn đang ở đây" + hướng nhìn, bấm vào gian để đi tới.
+- Góc trên ghi "Bạn đang ở: Gian …".
+- Thanh tham quan tự động ‹ › ở dưới: sảnh → đầu mỗi gian → từng ảnh → kết thúc.
+Chạy thử và chụp màn hình cho mình xem.</pre></div>
+
+<div class="prompt"><div class="head">Prompt 4 · Dùng tốt trên điện thoại<button class="copy">Chép</button></div>
+<pre>Làm cho bảo tàng dùng tốt trên điện thoại, cả cầm dọc và xoay ngang:
+- Cụm nút ▲ ▼ ◀ ▶ ở góc dưới bên TRÁI như game điện thoại (giữ để đi/quay), hiện trên MỌI thiết bị
+  (kể cả máy tính, bấm giữ bằng chuột), không bị ẩn khi đang đọc thuyết minh.
+- Không có bảng/nút nào đè lên nhau; khi xoay ngang: nút đi lại bên trái, thanh ‹ › bên phải,
+  bảng thuyết minh sát mép phải, bản đồ thu vào một nút.
+- Khi xem ảnh trên màn hình hẹp, camera tự lùi xa cho cả khung ảnh vừa màn hình.
+- Nút trên màn chào luôn thấy được mà không cần cuộn.
+Kiểm tra ở khổ 390×844 (dọc) và 844×390 (ngang) VÀ ở khổ máy tính thường, KHÔNG giả lập cảm ứng,
+chụp màn hình cả ba cho mình xem.</pre></div>
+
+<div class="prompt"><div class="head">Prompt 5 · Sửa nội dung về sau<button class="copy">Chép</button></div>
+<pre>Trong bảo tàng ở thư mục [đường dẫn]:
+[- Bỏ ảnh "…" ở Gian 2.]
+[- Thêm ảnh "…" kèm file Word "…" vào Gian 1, sau ảnh số 3.]
+[- Ảnh nào còn thiếu tiếng Anh thì dịch bổ sung, ghi rõ chỗ nào do AI dịch.]
+Chạy lại script tạo nội dung, mở trình duyệt kiểm tra đúng ảnh và chữ đã đổi, báo lại cho mình.</pre></div>
+
+<div class="prompt"><div class="head">Prompt 6 · Đưa lên mạng (GitHub Pages)<button class="copy">Chép</button></div>
+<pre>Mình muốn đưa bảo tàng ở thư mục [đường dẫn] lên mạng miễn phí bằng GitHub Pages để xem trên điện thoại.
+Mình không rành, hướng dẫn từng bước (tạo tài khoản GitHub nếu cần) hoặc làm giúp bằng gh CLI.
+Chỉ đưa các file cần để chạy (không đưa thư mục tư liệu gốc, ảnh chụp kiểm tra).
+Xong thì cho mình đường link và tạo mã QR dẫn tới link đó.</pre></div>
+
+<h2 id="dua-len-mang">9. Đưa lên mạng</h2>
+<p>Cách miễn phí, phổ biến: <b>GitHub Pages</b>.</p>
+<ol class="steps">
+  <li>Tạo tài khoản ở github.com.</li>
+  <li>Tạo một "repository" (kho chứa) mới, chế độ Public.</li>
+  <li>Tải lên các file chạy bảo tàng: <code>index.html</code>, <code>museum.js</code>, <code>content.js</code>, thư mục <code>assets</code> và <code>lib</code>.</li>
+  <li>Vào <b>Settings → Pages</b>, chọn nhánh <code>main</code>, bấm Save.</li>
+  <li>Sau vài phút có link dạng <code>https://ten-tai-khoan.github.io/ten-kho/</code>. Tạo mã QR từ link này để in ra cho khách quét.</li>
+</ol>
+<p class="muted">Không cần <code>server.py</code> khi đã lên mạng, vì GitHub đóng vai server. Dung lượng hiện tại khoảng 25 MB, nằm trong giới hạn cho phép. Bước này nhờ AI làm (Prompt 6) là nhanh nhất.</p>
+
+<h2 id="loi">10. Lỗi thường gặp</h2>
+<table>
+  <tr><th>Hiện tượng</th><th>Cách xử lý</th></tr>
+  <tr><td>Đã Lưu trên trang quản lý mà bảo tàng vẫn hiện chữ cũ</td><td>Nhấn <b>Ctrl + F5</b> (tải lại bỏ bộ nhớ đệm)</td></tr>
+  <tr><td>Bấm <code>mo-bao-tang.bat</code> báo không tìm thấy python</td><td>Cài Python, nhớ tích "Add Python to PATH", rồi mở lại</td></tr>
+  <tr><td>Trang trắng / màn chờ đứng mãi</td><td>Phải mở qua <code>mo-bao-tang.bat</code> (<code>http://localhost:8766</code>), không bấm đúp trực tiếp <code>index.html</code></td></tr>
+  <tr><td>Lưu xong báo lỗi không đọc được ảnh</td><td>File ảnh hỏng hoặc định dạng lạ: bấm <b>Đổi ảnh</b> và chọn bản JPG/PNG của ảnh đó</td></tr>
+  <tr><td>Lưu xong báo lỗi giọng đọc</td><td>Máy mất mạng lúc tạo giọng. Có mạng lại thì bấm Lưu lần nữa (sửa một ký tự rồi xóa đi để nút Lưu sáng lên), đoạn thiếu sẽ được đọc bù</td></tr>
+  <tr><td>Trang quản lý báo "Không đọc được noi-dung.json"</td><td>Đang có cửa sổ <code>mo-bao-tang.bat</code> cũ giữ cổng 8766: đóng mọi cửa sổ đen rồi mở lại <code>mo-quan-ly.bat</code></td></tr>
+  <tr><td>Mở 2 cửa sổ <code>mo-bao-tang.bat</code> cùng lúc, trang chạy lẫn bản cũ</td><td>Đóng hết các cửa sổ đen, mở lại 1 cái</td></tr>
+  <tr><td>Điện thoại không mở được <code>localhost</code></td><td>Bình thường: <code>localhost</code> chỉ là máy tính đó. Đưa lên mạng (mục 9)</td></tr>
+</table>
+
+<h2 id="con-mo">11. Việc còn dang dở (tính đến 25/11/2026)</h2>
+<ul>
+  <li><b>Gian 2, ảnh "Toàn cảnh điểm cao ngày nay":</b> tên file ảnh ghi <i>đồi 1049</i>, còn file Word ghép với nó lại nói về <i>Điểm cao 1015</i>. Cần xác nhận lại.</li>
+  <li><b>Gian 4, ảnh "Chứng tích Kon HRing"</b> (file tên "0.9."): đang xếp ở vị trí thứ 4. Cần xác nhận.</li>
+  <li><b>2 ảnh chưa có lời giới thiệu:</b> "Sa bàn diễn biến trận đánh" (Gian 2), trang Quyết định bảo vật quốc gia (Gian 3).</li>
+  <li><b>Tiếng Anh do AI dịch bổ sung:</b> Gian 2 ảnh 5; đoạn Quyết định 93 ở Gian 3 ảnh 13 (lấy từ file Word mục 14). Nên nhờ người rành tiếng Anh đọc lại.</li>
+  <li><b>Ý tưởng chưa làm:</b> trên Android tự xoay ngang + toàn màn hình khi bấm "Bắt đầu"; trên iPhone hiện lời nhắc "xoay ngang điện thoại".</li>
+  <li><b>Chưa thử trên điện thoại thật</b> và <b>chưa đưa lên mạng</b>.</li>
+</ul>
+
+</div>
+<script>
+  for (const btn of document.querySelectorAll('.prompt .copy')) {
+    btn.addEventListener('click', async () => {
+      const text = btn.closest('.prompt').querySelector('pre').innerText;
+      try { await navigator.clipboard.writeText(text); btn.textContent = 'Đã chép ✓'; }
+      catch { btn.textContent = 'Bôi đen để chép'; }
+      setTimeout(() => { btn.textContent = 'Chép'; }, 1800);
+    });
+  }
+</script>
+</body>
+</html>
