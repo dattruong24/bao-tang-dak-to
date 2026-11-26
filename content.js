@@ -17,7 +17,7 @@ export const GALLERIES = [
     "en": [
      "By late 1971 and early 1972, the 42nd Regiment's base had been completed as an impregnable fortress. The entire base was heavily fortified: the outermost layer was a minefield, followed by 8 to 12 layers of concertina barbed wire, and then the main defensive perimeter. This defensive line consisted of nearly 40 bunkers, all connected by communication trenches and fighting positions."
     ],
-    "credit": "Ảnh Bảo tàng Kon Tum cung cấp",
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-76531ca50528.mp3",
      "en": "assets/giong/en-566b52666690.mp3"
@@ -74,6 +74,7 @@ export const GALLERIES = [
     "en": [
      "This valuable archival photograph captures the landscape of the Vườn Chuối (Banana Garden) area, which once served as the secret assembly and staging ground for the 273rd Tank Regiment prior to launching the offensive against the Đăk Tô – Tân Cảnh fortified complex. The lightning-fast appearance of armored forces right in the heart of the Central Highlands battlefield completely shattered what was then the enemy's most heavily fortified defensive line."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-7c62f202e1ff.mp3",
      "en": "assets/giong/en-7397f0edabca.mp3"
@@ -92,6 +93,7 @@ export const GALLERIES = [
     "en": [
      "This archival photograph captures a sacred moment of officers and soldiers beside Tank 377 before departing to assault the Đăk Tô – Tân Cảnh fortified complex (April 24, 1972). With the Liberation flag fluttering atop the turret, fervent momentum and the spirit of \"determination to fight and win\" are vividly reflected in the gaze and posture of Uncle Ho’s soldiers moments before opening fire."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-90677a898146.mp3",
      "en": "assets/giong/en-c5639dbb268c.mp3"
@@ -110,6 +112,7 @@ export const GALLERIES = [
     "en": [
      "This valuable archival photograph captures the deep solidarity between the military and the people, as artillery troops alongside local residents tirelessly haul heavy artillery across rugged mountainous terrain to take up firing positions before opening fire."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-7843da71c5d6.mp3",
      "en": "assets/giong/en-8d78a48ce571.mp3"
@@ -128,6 +131,7 @@ export const GALLERIES = [
     "en": [
      "This photograph captures the solemn assembly of main force troops alongside guerrilla forces and the ethnic peoples of the Central Highlands. The image radiates the strength of great solidarity and a readiness for close, coordinated combat operations."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-8496c0aea933.mp3",
      "en": "assets/giong/en-d9bd91d3190e.mp3"
@@ -146,6 +150,7 @@ export const GALLERIES = [
     "en": [
      "Văn Lem Base served as a solid rear foothold, playing a decisive role in creating an overwhelming strategic posture that enabled our military and people to achieve the historic Đăk Tô – Tân Cảnh victory (April 24, 1972)."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-c10b0165611f.mp3",
      "en": "assets/giong/en-0d604789a530.mp3"
@@ -164,6 +169,7 @@ export const GALLERIES = [
     "en": [
      "This photograph captures the moment the ethnic peoples of Kon Tum personally hand over food supplies to sustain the troops before entering the Battle of Đăk Tô – Tân Cảnh (April 24, 1972)."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-8e08c9833257.mp3",
      "en": "assets/giong/en-2110ef571239.mp3"
