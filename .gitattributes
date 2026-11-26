@@ -1,0 +1,2 @@
+# .bat files keep CRLF in the repo too: the setup file is downloaded straight from the website
+*.bat -text
