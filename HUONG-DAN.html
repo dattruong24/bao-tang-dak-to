@@ -103,7 +103,7 @@
 ├─ noi-dung.json          ← NỘI DUNG GỐC: ảnh, tên, nguồn, lời giới thiệu (trang quản lý ghi vào đây)
 ├─ content.js             ← bản để bảo tàng đọc (TỰ TẠO từ noi-dung.json, không sửa tay)
 ├─ HUONG-DAN.html         ← file bạn đang đọc
-├─ nguon-anh\g1..g4\      ← ảnh gốc (kể cả ảnh tải lên từ trang quản lý)
+├─ nguon-anh\g1..g4\      ← ảnh gốc (kể cả ảnh tải lên từ trang quản lý; có trong repo để người khác sửa được)
 ├─ sao-luu\               ← bản noi-dung.json cũ, tự giữ lại mỗi lần bấm Lưu
 ├─ tools\
 │  ├─ build_content.py    ← script: noi-dung.json → ảnh JPG + giọng đọc + content.js
@@ -128,24 +128,21 @@
 <div class="tip"><code>localhost</code> nghĩa là "chính máy này": chỉ máy tính đó xem được. Muốn người khác hoặc điện thoại xem được thì phải đưa lên mạng (mục 9).</div>
 
 <h2 id="sua">5. Sửa nội dung, thêm ảnh</h2>
-<h3>Tài khoản đăng nhập trang quản lý</h3>
-<ol class="steps">
-  <li>Bấm đúp <code>tao-mat-khau.bat</code>, gõ mật khẩu 2 lần (chữ không hiện ra; nên dài ít nhất 8 ký tự). Máy in ra một mã md5 dài 32 ký tự.</li>
-  <li>Mở <code>tools\tai-khoan.json</code> bằng Notepad, điền tên đăng nhập vào <code>"user"</code> và mã vừa in vào <code>"md5"</code>. Muốn nhiều người thì thêm dòng: <pre>{ "user": "giaovien1", "md5": "…" },
-{ "user": "giaovien2", "md5": "…" }</pre></li>
-  <li>Lưu file. Không cần mở lại server. Đăng nhập giữ được 8 tiếng; hết hạn giữa chừng thì trang hỏi lại mật khẩu mà không mất phần đang sửa.</li>
-</ol>
-<div class="tip">File tài khoản không bao giờ được server phát ra trình duyệt, và đã nằm trong <code>.gitignore</code> nên không bị đẩy lên GitHub. Quên mật khẩu thì tạo mã mới và thay vào là xong.</div>
+<h3>Ai được sửa</h3>
+<p>Trang quản lý <b>không có đăng nhập</b>. Ai được thêm vào repo <code>dattruong24/bao-tang-dak-to</code> trên GitHub (Settings → Collaborators) thì sửa được, vì nút Lưu đẩy thay đổi lên repo bằng tài khoản GitHub của chính máy đó. Người không có quyền ghi vào repo vẫn mở được trang quản lý trên máy mình, nhưng bấm Lưu sẽ báo "push lỗi" và trang web không đổi.</p>
+<p>Máy của người sửa cần: <b>Python</b> (có Pillow và edge-tts: <code>pip install pillow edge-tts</code>), <b>Git</b> đã đăng nhập GitHub, và tải repo về một lần: <code>git clone https://github.com/dattruong24/bao-tang-dak-to.git</code>. Sau đó bấm đúp <code>mo-quan-ly.bat</code> trong thư mục vừa tải.</p>
 <h3>Dùng trang quản lý</h3>
 <ol class="steps">
   <li>Bấm đúp <code>mo-quan-ly.bat</code>. Trình duyệt mở trang quản lý. (Nếu đang mở bảo tàng bằng <code>mo-bao-tang.bat</code> thì đóng cửa sổ đen đó trước, vì hai cái dùng chung cổng 8766.)</li>
   <li>Chọn gian ở hàng nút trên cùng. Số bên cạnh, ví dụ <b>9/16</b>, là số ảnh hiện có trên số ảnh tối đa.</li>
   <li>Mỗi ảnh có: <b>Tên ảnh</b>, <b>Nguồn ảnh</b> (hiện dưới tên, chữ nhỏ, trong ngoặc), <b>lời giới thiệu tiếng Việt</b> và <b>English</b>. Muốn tách đoạn thì để một dòng trống giữa hai đoạn. Khung nâu phía trên cho xem trước bảng tên dưới tranh.</li>
   <li>Nút <b>↑ ↓</b> đổi thứ tự treo, <b>Đổi ảnh</b> thay ảnh nhưng giữ chữ, <b>Xóa</b> (bấm 2 lần) bỏ ảnh khỏi gian, <b>+ Thêm ảnh</b> thêm vào cuối gian.</li>
-  <li>Bấm <b>Lưu &amp; cập nhật bảo tàng</b>. Máy tự làm lại ảnh và giọng đọc cho phần đã đổi. Chỉ sửa ít chữ thì mất khoảng 10 giây, có nhiều đoạn chữ mới thì 1–3 phút. Cần có mạng để tạo giọng đọc.</li>
-  <li>Mở lại trang bảo tàng (F5) để xem.</li>
+  <li>Bấm <b>Lưu &amp; đăng lên web</b>. Máy tự làm lại ảnh và giọng đọc cho phần đã đổi, rồi đẩy lên GitHub. Chỉ sửa ít chữ thì mất khoảng 10 giây, có nhiều đoạn chữ mới thì 1–3 phút. Cần có mạng.</li>
+  <li>GitHub Pages tự cập nhật trang web sau khoảng 1–2 phút. Mở lại trang bảo tàng (F5) để xem.</li>
 </ol>
 <div class="tip"><b>Giới hạn ảnh mỗi gian</b> tính theo chỗ trống trên tường: mỗi ảnh có ít nhất 2,2 m tường. Hiện tại Gian 1: 16, Gian 2: 21, Gian 3: 21, Gian 4: 16. Gian đủ ảnh thì nút Thêm ảnh bị khóa. Con số nằm ở <code>MIN_SLOT</code> trong <code>layout.js</code>.</div>
+<div class="tip"><b>Hai người cùng sửa:</b> mỗi lần mở <code>mo-quan-ly.bat</code> máy tự lấy bản mới nhất từ GitHub. Nếu trong lúc bạn đang sửa có người khác vừa đăng, bấm Lưu sẽ báo và lấy bản mới về; bấm F5 rồi sửa lại phần của bạn. Như vậy không ai ghi đè phần của người kia.</div>
+<div class="tip"><b>Lưu được nhưng chưa lên web</b> (mất mạng, chưa đăng nhập GitHub, không có quyền repo): thay đổi vẫn nằm trên máy. Sửa xong nguyên nhân thì bấm Lưu lần nữa để đăng.</div>
 <div class="tip"><b>Lỡ sửa sai:</b> mỗi lần Lưu, bản cũ được giữ trong <code>sao-luu\</code>. Chép bản muốn lấy lại đè lên <code>noi-dung.json</code>, rồi chạy <code>python tools\build_content.py</code> (hoặc nhờ AI làm).</div>
 <div class="tip"><b>Ô để trống thì không hiện:</b> gian nào cũng điền được tên ảnh, nguồn, lời giới thiệu. Ảnh không có tên và nguồn thì không có bảng tên dưới tranh; không có lời giới thiệu thì không có phần chữ và nút loa. Gian 4 hiện chưa có chữ nên chỉ thấy ảnh.</div>
 <h3>Giọng đọc</h3>

@@ -3,25 +3,21 @@ r"""Web server nho de mo bao tang va trang quan ly tren may (http://localhost:87
 http.server mac dinh chi xep hang 5 ket noi, trinh duyet tai nhieu file cung luc se bi tu choi.
 no-cache: sau khi chay lai build_content.py, trinh duyet phai lay content.js moi chu khong dung ban cu.
 
+Khong co dang nhap (chu nha bo 2026-11-26): ai sua duoc bao tang tren mang la do quyen ghi vao repo GitHub.
 API cho quan-ly.html (chi nghe 127.0.0.1, may khac khong goi duoc):
-  POST /api/dang-nhap {"user","password"} -> kiem md5(password) voi tools\tai-khoan.json, cap cookie phien 8 gio
-  GET  /api/toi                    -> ten dang nhap cua phien (401 neu chua dang nhap)
-  POST /api/dang-xuat
-  Can dang nhap:
   GET  /api/noi-dung              -> noi-dung.json
   POST /api/anh?gian=g1&ten=a.jpg  (than = file anh) -> luu vao nguon-anh\g1\, tra {"image": duong dan}
-  POST /api/luu                    (than = noi dung moi) -> sao luu ban cu vao sao-luu\, ghi file, chay build
-tools\, sao-luu\, nguon-anh\ va noi-dung.json khong phat ra ngoai (file tai khoan nam trong tools\).
+  POST /api/luu                    (than = noi dung moi) -> sao luu ban cu vao sao-luu\, ghi file, chay build,
+                                      roi commit + push len GitHub (GitHub Pages tu cap nhat sau 1-2 phut)
+Khi mo server: git pull de lay ban moi nhat. Truoc moi lan Luu: co ai vua day ban moi thi lay ve va bao tai lai trang,
+de khong ghi de phan nguoi khac vua sua.
+tools\, sao-luu\, nguon-anh\ va noi-dung.json khong phat ra trinh duyet o may nay.
 """
 import functools
-import hashlib
-import hmac
-import http.cookies
 import http.server
 import json
 import os
 import re
-import secrets
 import subprocess
 import sys
 import threading
@@ -32,7 +28,7 @@ import urllib.parse
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
-ROOT =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8765
 DATA = os.path.join(ROOT, "noi-dung.json")
 BACKUP = os.path.join(ROOT, "sao-luu")
@@ -40,12 +36,9 @@ IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp", ".jfif", ".avif", ".gif", ".bmp",
 MAX_IMAGE = 40 * 1024 * 1024
 build_lock = threading.Lock()
 
-ACCOUNTS = os.path.join(ROOT, "tools", "tai-khoan.json")
-SESSION_HOURS = 8
-COOKIE = "baotang_phien"
-sessions = {}            # token -> (user, het han luc)
-sessions_lock = threading.Lock()
-# Thu muc/file khong bao gio phat ra trinh duyet (file tai khoan, anh goc, sao luu, ma nguon server).
+# Chi nhung duong dan nay duoc commit khi bam Luu (sao-luu\ va file rieng khac trong may khong bi day len).
+PUBLISH = ["noi-dung.json", "content.js", "assets", "nguon-anh"]
+# Thu muc/file khong bao gio phat ra trinh duyet (anh goc, sao luu, ma nguon server).
 PRIVATE = [os.path.normcase(os.path.realpath(os.path.join(ROOT, p)))
            for p in ("tools", "sao-luu", "nguon-anh", "noi-dung.json")]
 
@@ -57,21 +50,50 @@ def is_private(fs_path):
     return any(real == p or real.startswith(p + os.sep) for p in PRIVATE)
 
 
-def check_login(user, password):
-    """Doc lai file tai khoan moi lan (sua file khong can mo lai server). Tra ve (ten, None) hoac (None, ly do)."""
-    try:
-        with open(ACCOUNTS, encoding="utf-8") as f:
-            accounts = json.load(f).get("accounts", [])
-    except FileNotFoundError:
-        return None, "chưa có file tools\\tai-khoan.json"
-    except ValueError as e:
-        return None, f"file tai-khoan.json sai định dạng ({e})"
-    given = hashlib.md5(password.encode("utf-8")).hexdigest()
-    for a in accounts:
-        want = str(a.get("md5", "")).strip().lower()
-        if a.get("user") == user and re.fullmatch(r"[0-9a-f]{32}", want) and hmac.compare_digest(given, want):
-            return user, None
-    return None, "sai tên đăng nhập hoặc mật khẩu"
+def now():
+    return time.strftime("%H:%M:%S")
+
+
+def git(*args):
+    r = subprocess.run(["git", *args], capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
+    return r.returncode, (r.stdout + r.stderr).strip()
+
+
+def remote_news():
+    """Co nguoi khac vua day ban moi len GitHub thi lay ve truoc khi luu, de khong ghi de phan cua ho.
+    Tra ve ly do (chuoi) neu trang phai tai lai; None neu luu tiep duoc."""
+    code, out = git("fetch", "--quiet")
+    if code != 0:
+        print(f"[{now()}] không kiểm tra được GitHub (mất mạng?): {out}")
+        return None  # mat mang: van cho luu tren may; buoc push se bao loi
+    code, n = git("rev-list", "--count", "HEAD..@{u}")
+    if code != 0 or n.strip() == "0":
+        return None
+    code, out = git("pull", "--ff-only", "--quiet")
+    if code != 0:
+        return "Có người vừa đăng bản mới lên GitHub nhưng máy này lấy về không được:\n" + out
+    return ("Có người vừa đăng bản mới lên GitHub. Máy đã lấy bản mới về. Bấm F5 tải lại trang "
+            "rồi sửa lại phần của bạn (phần vừa sửa chưa được lưu).")
+
+
+def publish():
+    """Commit cac file cua bao tang roi push. GitHub Pages tu dung lai trang khi nhan push.
+    Tra ve (da_len_web, nhat_ky)."""
+    git("add", "-A", "--", *PUBLISH)
+    code, _ = git("diff", "--cached", "--quiet")
+    if code != 0:
+        code, out = git("commit", "-m", "Cập nhật nội dung từ trang quản lý")
+        if code != 0:
+            return False, "Không commit được:\n" + out
+    else:
+        code, n = git("rev-list", "--count", "@{u}..HEAD")
+        if code == 0 and n.strip() == "0":
+            return True, "Không có gì mới để đăng."
+    code, out = git("push")
+    if code != 0:
+        return False, ("Đã lưu trên máy nhưng CHƯA đăng lên web (push lỗi). Kiểm tra mạng và quyền ghi vào repo, "
+                       "rồi bấm Lưu lần nữa để đăng lại.\n" + out)
+    return True, "Đã đẩy lên GitHub. Trang web tự cập nhật sau khoảng 1-2 phút.\n" + out
 
 
 class Server(http.server.ThreadingHTTPServer):
@@ -134,27 +156,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         origin = self.headers.get("Origin")
         return origin is None or origin in (f"http://localhost:{PORT}", f"http://127.0.0.1:{PORT}")
 
-    def current_user(self):
-        jar = http.cookies.SimpleCookie(self.headers.get("Cookie", ""))
-        token = jar[COOKIE].value if COOKIE in jar else ""
-        with sessions_lock:
-            s = sessions.get(token)
-            if s and s[1] > time.time():
-                return s[0]
-            sessions.pop(token, None)
-        return None
-
-    def set_cookie(self, token, max_age):
-        return f"{COOKIE}={token}; Path=/; HttpOnly; SameSite=Strict; Max-Age={max_age}"
-
     def do_GET(self):
         path = urllib.parse.unquote(self.path.split("?")[0])
-        if path == "/api/toi":
-            user = self.current_user()
-            return self.send_json(200 if user else 401, {"user": user})
         if path == "/api/noi-dung":
-            if not self.current_user():
-                return self.send_json(401, {"error": "chưa đăng nhập"})
             with open(DATA, encoding="utf-8") as f:
                 return self.send_json(200, json.load(f))
         return super().do_GET()
@@ -171,52 +175,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         url = urllib.parse.urlparse(self.path)
         if not self.same_origin():
             return self.send_json(403, {"error": "không cho phép"})
-        if url.path == "/api/dang-nhap":
-            return self.login()
-        if url.path == "/api/dang-xuat":
-            return self.logout()
-        user = self.current_user()
-        if not user:
-            return self.send_json(401, {"error": "chưa đăng nhập hoặc hết phiên, đăng nhập lại"})
         if url.path == "/api/anh":
             return self.upload(urllib.parse.parse_qs(url.query))
         if url.path == "/api/luu":
-            print(f"[{time.strftime('%H:%M:%S')}] {user} bấm Lưu")
+            print(f"[{now()}] bấm Lưu")
             return self.save()
         self.send_json(404, {"error": "không có"})
-
-    def login(self):
-        raw = self.read_body(10_000)
-        try:
-            body = json.loads(raw.decode("utf-8")) if raw else {}
-        except ValueError:
-            body = {}
-        user, err = check_login(str(body.get("user", "")), str(body.get("password", "")))
-        if not user:
-            time.sleep(1)  # cham lai de khong do mat khau nhanh duoc
-            print(f"[{time.strftime('%H:%M:%S')}] đăng nhập hỏng: {err}")
-            return self.send_json(401, {"error": err})
-        token = secrets.token_urlsafe(32)
-        with sessions_lock:
-            sessions[token] = (user, time.time() + SESSION_HOURS * 3600)
-        body = json.dumps({"user": user}, ensure_ascii=False).encode("utf-8")
-        self.send_response(200)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Set-Cookie", self.set_cookie(token, SESSION_HOURS * 3600))
-        self.end_headers()
-        self.wfile.write(body)
-        print(f"[{time.strftime('%H:%M:%S')}] {user} đăng nhập")
-
-    def logout(self):
-        jar = http.cookies.SimpleCookie(self.headers.get("Cookie", ""))
-        if COOKIE in jar:
-            with sessions_lock:
-                sessions.pop(jar[COOKIE].value, None)
-        self.send_response(200)
-        self.send_header("Set-Cookie", self.set_cookie("", 0))
-        self.send_header("Content-Length", "0")
-        self.end_headers()
 
     def upload(self, q):
         gid = (q.get("gian") or [""])[0]
@@ -247,6 +211,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         if not build_lock.acquire(blocking=False):
             return self.send_json(409, {"error": "đang cập nhật lần trước, chờ xong rồi lưu lại"})
         try:
+            behind = remote_news()
+            if behind:
+                return self.send_json(409, {"error": behind})
             os.makedirs(BACKUP, exist_ok=True)
             stamp = time.strftime("%Y%m%d-%H%M%S")
             os.replace(DATA, os.path.join(BACKUP, f"noi-dung-{stamp}.json"))
@@ -255,11 +222,23 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             r = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "build_content.py")],
                                capture_output=True, text=True, encoding="utf-8", errors="replace", cwd=ROOT)
             log = (r.stdout + r.stderr).strip()
-            self.send_json(200, {"ok": r.returncode == 0, "log": log, "backup": f"sao-luu/noi-dung-{stamp}.json"})
+            if r.returncode != 0:
+                pushed, plog = False, "Chưa đăng lên web vì bước build bị lỗi (xem ở trên). Sửa xong bấm Lưu lại."
+            else:
+                pushed, plog = publish()
+            print(f"[{now()}] {plog.splitlines()[0]}")
+            self.send_json(200, {"ok": r.returncode == 0, "pushed": pushed,
+                                 "log": f"{log}\n\n--- Đăng lên web ---\n{plog}",
+                                 "backup": f"sao-luu/noi-dung-{stamp}.json"})
         finally:
             build_lock.release()
 
 
+code, out = git("pull", "--ff-only")
+if code == 0:
+    print("Lấy bản mới nhất từ GitHub: " + (out or "ok"))
+else:
+    print("CHÚ Ý: chưa lấy được bản mới từ GitHub (mất mạng, hoặc máy có thay đổi chưa đăng):\n" + out)
 handler = functools.partial(Handler, directory=ROOT)
 print(f"Bao tang dang chay tai http://localhost:{PORT}/  (dong cua so nay de tat)")
 print(f"Trang quan ly: http://localhost:{PORT}/quan-ly.html")
