@@ -130,7 +130,14 @@
 <h2 id="sua">5. Sửa nội dung, thêm ảnh</h2>
 <h3>Ai được sửa</h3>
 <p>Trang quản lý <b>không có đăng nhập</b>. Ai được thêm vào repo <code>dattruong24/bao-tang-dak-to</code> trên GitHub (Settings → Collaborators) thì sửa được, vì nút Lưu đẩy thay đổi lên repo bằng tài khoản GitHub của chính máy đó. Người không có quyền ghi vào repo vẫn mở được trang quản lý trên máy mình, nhưng bấm Lưu sẽ báo "push lỗi" và trang web không đổi.</p>
-<p>Máy của người sửa cần: <b>Python</b> (có Pillow và edge-tts: <code>pip install pillow edge-tts</code>), <b>Git</b> đã đăng nhập GitHub, và tải repo về một lần: <code>git clone https://github.com/dattruong24/bao-tang-dak-to.git</code>. Sau đó bấm đúp <code>mo-quan-ly.bat</code> trong thư mục vừa tải.</p>
+<p><b>Cài đặt cho người mới (một lần):</b></p>
+<ol class="steps">
+  <li>Bạn mời họ vào repo (Settings → Collaborators). Họ mở email và bấm <b>Accept</b>.</li>
+  <li>Họ tải file <a href="https://dattruong24.github.io/bao-tang-dak-to/cai-dat-lan-dau.bat"><code>cai-dat-lan-dau.bat</code></a> về, đặt vào thư mục muốn để bảo tàng (ví dụ Desktop), rồi bấm đúp. Windows có thể cảnh báo file tải từ mạng: bấm "More info" → "Run anyway".</li>
+  <li>File tự làm: cài Git và Python nếu chưa có (cài xong sẽ nhắc đóng và chạy lại file), cài gói Pillow + edge-tts, hỏi tên và email GitHub, tải bảo tàng về thư mục <code>bao-tang-dak-to</code> bên cạnh, mở đăng nhập GitHub và kiểm tra họ có quyền đăng lên web chưa.</li>
+  <li>Từ đó về sau: bấm đúp <code>mo-quan-ly.bat</code> trong thư mục <code>bao-tang-dak-to</code>.</li>
+</ol>
+<p class="muted">Chạy lại <code>cai-dat-lan-dau.bat</code> bao nhiêu lần cũng được: bước nào xong rồi thì bỏ qua. Báo "chưa có quyền đăng lên web" thì thường là chưa Accept lời mời hoặc đăng nhập nhầm tài khoản GitHub.</p>
 <h3>Dùng trang quản lý</h3>
 <ol class="steps">
   <li>Bấm đúp <code>mo-quan-ly.bat</code>. Trình duyệt mở trang quản lý. (Nếu đang mở bảo tàng bằng <code>mo-bao-tang.bat</code> thì đóng cửa sổ đen đó trước, vì hai cái dùng chung cổng 8766.)</li>

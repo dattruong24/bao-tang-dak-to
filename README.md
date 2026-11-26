@@ -17,6 +17,7 @@ Vietnamese and English captions, and a read-aloud button for each caption.
   to this repository.
 - Original photos are in `nguon-anh/`, so any collaborator can rebuild.
 
+New editor: run `cai-dat-lan-dau.bat` once (installs Git, Python packages, clones, checks write access).
 Run locally: double-click `mo-bao-tang.bat` (museum) or `mo-quan-ly.bat` (manager). Needs Python 3 with Pillow and edge-tts, and Git signed in to GitHub for publishing.
 
 Textures and HDRI: Poly Haven (CC0). 3D library: three.js (MIT).
