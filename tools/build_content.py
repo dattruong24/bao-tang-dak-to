@@ -216,6 +216,12 @@ def main():
         f.write("export const GALLERIES = ")
         f.write(json.dumps(out, ensure_ascii=False, indent=1))
         f.write(";\n")
+    # Version = hash of content.js. museum.js reads version.json past the cache, then loads content.js?v=...,
+    # so the site shows a Save at once (GitHub Pages lets browsers keep old files for 10 minutes).
+    with open(os.path.join(HERE, "content.js"), "rb") as f:
+        version = hashlib.sha1(f.read()).hexdigest()[:10]
+    with open(os.path.join(HERE, "version.json"), "w", encoding="utf-8", newline="\n") as f:
+        json.dump({"v": version}, f)
     print("\n".join(report))
     for p in problems:
         print("LỖI", p)

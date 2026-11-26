@@ -1,10 +1,15 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { GALLERIES } from './content.js';
 import {
   WALL_T, ROOMS, DOOR, WALLS, DOORS, ROUTE, FLOOR_PATH, PLAN, roomEdges, along, wallSpot, wallSlots,
 } from './layout.js';
+
+// content.js by the version number in version.json (read past the cache), so a Save shows at once:
+// GitHub Pages lets browsers keep old files for 10 minutes.
+const contentVersion = await fetch('./version.json', { cache: 'no-store' })
+  .then((r) => r.json()).then((j) => j.v).catch(() => Date.now());
+const { GALLERIES } = await import(`./content.js?v=${contentVersion}`);
 
 const TITLE = 'Bảo tàng số Chiến thắng Đăk Tô – Tân Cảnh';
 const SUBTITLE = 'Bảo tàng số 4.0 · Chiến thắng Đăk Tô – Tân Cảnh 24/4/1972';

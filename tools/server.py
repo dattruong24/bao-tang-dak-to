@@ -37,7 +37,7 @@ MAX_IMAGE = 40 * 1024 * 1024
 build_lock = threading.Lock()
 
 # Chi nhung duong dan nay duoc commit khi bam Luu (sao-luu\ va file rieng khac trong may khong bi day len).
-PUBLISH = ["noi-dung.json", "content.js", "assets", "nguon-anh"]
+PUBLISH = ["noi-dung.json", "content.js", "version.json", "assets", "nguon-anh"]
 # Thu muc/file khong bao gio phat ra trinh duyet (anh goc, sao luu, ma nguon server).
 PRIVATE = [os.path.normcase(os.path.realpath(os.path.join(ROOT, p)))
            for p in ("tools", "sao-luu", "nguon-anh", "noi-dung.json")]
