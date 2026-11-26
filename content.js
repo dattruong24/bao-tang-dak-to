@@ -10,7 +10,7 @@ export const GALLERIES = [
     "w": 876,
     "h": 547,
     "goc": "nguon-anh/g1/01-01. Toàn cảnh trung đoàn 42 (Ảnh Bảo tàng Kon Tum cung cấp ).png",
-    "title": "Toàn cảnh căn cứ Trung đoàn 424",
+    "title": "Toàn cảnh căn cứ Trung đoàn 42",
     "vi": [
      "Cuối năm 1971 đầu năm 1972 căn cứ trung đoàn 42 đã hoàn chỉnh như một pháo đài bất khả xâm phạm. Toàn căn cứ được bố phòng chặt chẽ, ngoài cùng là hàng rào mìn, tiếp đó là 8 đến 12 lớp rào kẽm gai bùng nhùng, rồi đến hàng rào phòng thủ, hàng rào phòng thủ được cấu tạo gần 40 lô cốt, các lô cốt được nối với nhau bởi các giao thông hào và công sự chiến đấu."
     ],
@@ -19,7 +19,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
-     "vi": "assets/giong/vi-76531ca50528.mp3",
+     "vi": "assets/giong/vi-d037bef0eead.mp3",
      "en": "assets/giong/en-566b52666690.mp3"
     }
    },
