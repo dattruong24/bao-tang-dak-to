@@ -682,9 +682,18 @@ export const GALLERIES = [
     "w": 1024,
     "h": 576,
     "goc": "nguon-anh/g4/01-01. Quảng trường 244.jfif",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Quảng trường 24/4",
+    "vi": [
+     "Nằm ngay trung tâm xã Đăk Tô, Quảng trường 24/4 gây ấn tượng với không gian thoáng đãng, rợp bóng cây xanh cùng biểu tượng đài hoa sen trắng vươn cao đầy kiêu hãnh. Tên gọi quảng trường khắc ghi dấu mốc lịch sử giải phóng Đăk Tô – Tân Cảnh ngày 24/4/1972 hào hùng. Nơi đây không chỉ là niềm tự hào của người dân địa phương mà còn là điểm sinh hoạt cộng đồng và dạo mát lý tưởng cho du khách."
+    ],
+    "en": [
+     "Located right in the heart of Đăk Tô Commune, 24/4 Square impresses visitors with its spacious, tree-lined grounds and a proud white lotus monument rising against the sky. Its name commemorates the historic liberation of Đăk Tô – Tân Cảnh on April 24, 1972. Today, it stands not only as a symbol of local pride but also as a vibrant gathering space for residents and travelers alike."
+    ],
+    "credit": "Học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-327da5f9ec65.mp3",
+     "en": "assets/giong/en-a04cd712bb62.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/37444abb9b46.jpg",
@@ -692,9 +701,18 @@ export const GALLERIES = [
     "w": 803,
     "h": 542,
     "goc": "nguon-anh/g4/02-02. Sông Pô Kô.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Dòng sông Pô Kô",
+    "vi": [
+     "Dòng sông Pô Kô huyền thoại uốn lượn hiền hòa giữa đại ngàn xanh thẳm, mang theo vẻ đẹp vừa thơ mộng vừa hùng tráng của núi rừng Tây Nguyên. Mặt nước êm ả phản chiếu ánh nắng chiều lấp lánh bên những ghềnh đá nhấp nhô và rặng tre xanh mướt đôi bờ. Từng đi vào thi ca và lịch sử kháng chiến oanh liệt, Pô Kô hôm nay mở ra không gian thư thái, bình yên đến lạ thường."
+    ],
+    "en": [
+     "The legendary Pô Kô River winds gently through lush green forests, embodying both the poetic charm and majestic spirit of the Central Highlands. Its calm waters shimmer in the warm sunlight beside rocky outcrops and verdant bamboo groves along the banks. Immortalised in wartime history and poetry, the Pô Kô today offers visitors a remarkably tranquil and refreshing retreat."
+    ],
+    "credit": "Ảh do học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-fa9d95bc4ca4.mp3",
+     "en": "assets/giong/en-72fc1d01ce6a.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/eed088997d73.jpg",
@@ -702,9 +720,18 @@ export const GALLERIES = [
     "w": 800,
     "h": 450,
     "goc": "nguon-anh/g4/03-03. Cầu treo ĐăkRiPeng.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Cầu ĐăkRiPeng",
+    "vi": [
+     "Bắt nhịp qua dòng sông hiền hòa, cầu treo Đăk Ri Peng mang vẻ đẹp mộc mạc, vững chãi với những nhịp dây văng vươn cao giữa nền trời lộng gió. Đứng trên mặt cầu lộng nắng chiều, du khách có thể thu trọn vào tầm mắt bức tranh bãi bồi xanh mướt và nhịp sống bình dị của bà con địa phương. Đây là điểm dừng chân check-in đầy hoài niệm cho những ai yêu thích khám phá vẻ đẹp nguyên sơ của Đăk Tô."
+    ],
+    "en": [
+     "Spanning gracefully across the river, the Đăk Ri Peng Suspension Bridge showcases a rustic yet sturdy charm with its steel towers and cables silhouetted against the breezy sky. Standing on the bridge in the late afternoon light, visitors can take in panoramic views of lush river banks and the peaceful daily rhythm of local life. It is a nostalgic stop over for travelers eager to capture the unspoiled beauty of Đăk Tô."
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-42ed216245b7.mp3",
+     "en": "assets/giong/en-12d635afcfc1.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/57e920cefaa2.jpg",
@@ -712,16 +739,6 @@ export const GALLERIES = [
     "w": 880,
     "h": 824,
     "goc": "nguon-anh/g4/04-0.9. Chứng tích Kon HRing.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
-   },
-   {
-    "src": "assets/tranh/g4/963bc34a3e19.jpg",
-    "full": "assets/tranh/g4/963bc34a3e19-lon.jpg",
-    "w": 1024,
-    "h": 576,
-    "goc": "nguon-anh/g4/05-05. Nhà rông văn hóa.jfif",
     "title": "",
     "vi": [],
     "en": []
@@ -742,9 +759,17 @@ export const GALLERIES = [
     "w": 934,
     "h": 609,
     "goc": "nguon-anh/g4/07-07.Một góc Đăk Tô hôm nay.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Một góc Đăk Tô hôm nay",
+    "vi": [
+     "Rũ bỏ bụi mờ chiến tranh, Đăk Tô hôm nay khoác lên mình diện mạo của một đô thị miền núi khang trang, năng động và tràn đầy sức sống. Những tuyến đường rộng mở rợp bóng cây xanh cùng dãy phố san sát, rực rỡ sắc cờ đỏ sao vàng tạo nên bức tranh phát triển đầy khởi sắc. Dạo bước qua góc phố bình yên này, du khách sẽ cảm nhận trọn vẹn nhịp sống đổi thay từng ngày và sự mến khách nồng hậu của con người nơi đây."
+    ],
+    "en": [
+     "Having risen from the ashes of war, modern-day Đăk Tô presents the vibrant, dynamic face of a thriving highland town. Wide tree-lined avenues, neat rows of red-roofed homes, and fluttering national flags paint an inspiring picture of local renewal and growth. Strolling through these peaceful streets, travelers can genuinely experience the region's daily transformation and the warm hospitality of its people."
+    ],
+    "credit": "Học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-6452124b7243.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/5abf3c316c07.jpg",
@@ -762,9 +787,18 @@ export const GALLERIES = [
     "w": 781,
     "h": 701,
     "goc": "nguon-anh/g4/09-09. Suối Đăk Na.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Suối Đăk Na (Đăk Tô)",
+    "vi": [
+     "Ẩn mình giữa núi rừng hoang sơ, suối Đăk Na quyến rũ du khách bởi dòng nước mát lạnh tuôn trào trắng xóa qua những ghềnh đá tự nhiên xếp tầng kỳ thú. Bao quanh con suối là thảm thực vật xanh mướt quanh năm, hòa cùng tiếng nước chảy róc rách tạo nên bản giao hưởng thiên nhiên đầy thư giãn. Đây chính là điểm dã ngoại lý tưởng để du khách hòa mình vào thiên nhiên trong lành, xua tan mọi mệt mỏi."
+    ],
+    "en": [
+     "Tucked away amidst untouched mountain forests, Đăk Na Stream enchants visitors with crystal-clear, cool waters cascading in white foam over tiered natural boulders. Surrounded by year-round lush greenery, the stream's gentle murmur creates a soothing symphony of nature. It is an ideal eco-picnic spot for travelers looking to immerse themselves in fresh wilderness and unwind completely."
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-2d3cc956ddbd.mp3",
+     "en": "assets/giong/en-30cbcb138fab.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/5f0496af0712.jpg",
@@ -773,8 +807,16 @@ export const GALLERIES = [
     "h": 973,
     "goc": "nguon-anh/g4/10-10. Nghĩa trang liệt sĩ Đăk Tô.jpg",
     "title": "",
-    "vi": [],
-    "en": []
+    "vi": [
+     "Trong ánh hoàng hôn trầm mặc, Nghĩa trang liệt sĩ Đăk Tô hiện lên trang nghiêm với tượng đài \"Tổ quốc ghi công\" vươn cao giữa hàng thông xanh tĩnh lặng. Ánh nến tri ân lung linh xếp thành hình ngôi sao năm cánh trước lễ đài như sưởi ấm giấc ngủ ngàn thu của các anh hùng liệt sĩ đã ngã xuống vì độc lập tự do. Điểm dừng chân thiêng liêng này luôn gợi nhắc mỗi du khách về đạo lý \"Uống nước nhớ nguồn\" sâu nặng của dân tộc Việt Nam."
+    ],
+    "en": [
+     "Bathed in the quiet twilight, the Đăk Tô Martyrs' Cemetery stands in solemn reverence, anchored by the towering \"The Fatherland Remembers Your Sacrifice\" monument amidst tranquil pine trees. Flickering tribute candles arranged in a five-pointed star before the altar illuminate the resting place of the fallen heroes who gave their lives for independence and freedom. This sacred landmark serves as a poignant reminder of Vietnam's deep-rooted gratitude toward those who sacrificed for the nation."
+    ],
+    "audio": {
+     "vi": "assets/giong/vi-d2b0e75500f2.mp3",
+     "en": "assets/giong/en-f676a58ca4b5.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/1805aac3bd06.jpg",
