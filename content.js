@@ -720,7 +720,7 @@ export const GALLERIES = [
     "w": 800,
     "h": 450,
     "goc": "nguon-anh/g4/03-03. Cầu treo ĐăkRiPeng.jpg",
-    "title": "Cầu ĐăkRiPeng",
+    "title": "Cầu Đăk Ri Peng",
     "vi": [
      "Bắt nhịp qua dòng sông hiền hòa, cầu treo Đăk Ri Peng mang vẻ đẹp mộc mạc, vững chãi với những nhịp dây văng vươn cao giữa nền trời lộng gió. Đứng trên mặt cầu lộng nắng chiều, du khách có thể thu trọn vào tầm mắt bức tranh bãi bồi xanh mướt và nhịp sống bình dị của bà con địa phương. Đây là điểm dừng chân check-in đầy hoài niệm cho những ai yêu thích khám phá vẻ đẹp nguyên sơ của Đăk Tô."
     ],
@@ -729,7 +729,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh học sinh chụp",
     "audio": {
-     "vi": "assets/giong/vi-42ed216245b7.mp3",
+     "vi": "assets/giong/vi-2350ff1d1bc6.mp3",
      "en": "assets/giong/en-12d635afcfc1.mp3"
     }
    },
@@ -739,7 +739,7 @@ export const GALLERIES = [
     "w": 880,
     "h": 824,
     "goc": "nguon-anh/g4/04-0.9. Chứng tích Kon HRing.jpg",
-    "title": "Chứng tích KonHRing",
+    "title": "Chứng tích Kon H'Ring",
     "vi": [
      "Khu chứng tích Kon H'ring là nơi tưởng niệm hàng trăm đồng bào vô tội đã ngã xuống trong biến cố đau thương năm 1969. Hình ảnh thế hệ trẻ trong màu áo đỏ sao vàng ngay ngắn dâng hương trước đài tưởng niệm đã khắc họa sinh động hành trình giáo dục truyền thống cách mạng. Điểm dừng chân xúc động này nhắc nhở mỗi du khách càng thêm trân trọng giá trị thiêng liêng của hòa bình hôm nay."
     ],
@@ -748,7 +748,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh do học sinh chụp",
     "audio": {
-     "vi": "assets/giong/vi-513be67b9980.mp3",
+     "vi": "assets/giong/vi-d1a2d7a39edb.mp3",
      "en": "assets/giong/en-86f5dfd14003.mp3"
     }
    },
@@ -767,6 +767,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh do học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-34ec3c2c248e.mp3",
      "en": "assets/giong/en-c134aa2b1355.mp3"
     }
    },
@@ -861,6 +862,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-e68a0fb20768.mp3",
      "en": "assets/giong/en-10b5bfd21932.mp3"
     }
    },
@@ -879,6 +881,7 @@ export const GALLERIES = [
     ],
     "credit": "Học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-4bddbc39c589.mp3",
      "en": "assets/giong/en-6b65d7d5d0c5.mp3"
     }
    },
@@ -897,6 +900,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh do học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-7211003b996d.mp3",
      "en": "assets/giong/en-da0401793ab3.mp3"
     }
    }
