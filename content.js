@@ -739,9 +739,18 @@ export const GALLERIES = [
     "w": 880,
     "h": 824,
     "goc": "nguon-anh/g4/04-0.9. Chứng tích Kon HRing.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Chứng tích KonHRing",
+    "vi": [
+     "Khu chứng tích Kon H'ring là nơi tưởng niệm hàng trăm đồng bào vô tội đã ngã xuống trong biến cố đau thương năm 1969. Hình ảnh thế hệ trẻ trong màu áo đỏ sao vàng ngay ngắn dâng hương trước đài tưởng niệm đã khắc họa sinh động hành trình giáo dục truyền thống cách mạng. Điểm dừng chân xúc động này nhắc nhở mỗi du khách càng thêm trân trọng giá trị thiêng liêng của hòa bình hôm nay."
+    ],
+    "en": [
+     "the Kon H'ring Historical Site commemorates hundreds of innocent civilians who perished in the tragic 1969 massacre. The sight of young students in red shirts standing in neat formation to pay tribute before the memorial vividly reflects the ongoing journey of patriotic education. This deeply moving landmark reminds every visitor to cherish the sacred value of peace today"
+    ],
+    "credit": "Ảnh do học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-513be67b9980.mp3",
+     "en": "assets/giong/en-86f5dfd14003.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/8bd5d2151884.jpg",
@@ -749,9 +758,17 @@ export const GALLERIES = [
     "w": 1024,
     "h": 768,
     "goc": "nguon-anh/g4/06-06.Khu di tích chiến thắng Đăk Tô - Tân Cảnh.png",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Khu di tích lịch sử Quốc gia đặc biệt Chiến thắng Đăk Tô – Tân Cảnh (Căn cứ E42)",
+    "vi": [
+     "Cổng đá tứ trụ uy nghiêm mở lối vào Khu di tích lịch sử Quốc gia đặc biệt Chiến thắng Đăk Tô – Tân Cảnh (Căn cứ E42), nơi ghi dấu trận đánh hiệp đồng binh chủng vang dội mùa xuân năm 1972. Công trình hiện đang trong giai đoạn đầu tư xây dựng và tôn tạo khang trang với khu đền tưởng niệm dần hiện hữu giữa vùng đất lịch sử thiêng liêng. Khi hoàn thiện, nơi đây sẽ trở thành một \"địa chỉ đỏ\" bề thế, trang trọng để du khách về nguồn và tri ân truyền thống bất khuất của dân tộc."
+    ],
+    "en": [
+     "A majestic four-pillar stone gate opens into the Đăk Tô – Tân Cảnh Victory Special National Historical Site (Base E42), marking the resounding combined-arms battle in the spring of 1972. The complex is currently undergoing extensive construction and restoration, with the memorial temple taking shape amidst this sacred historical ground. Once completed, it will stand as a grand and solemn heritage destination for visitors to reconnect with history and honor the nation's indomitable spirit"
+    ],
+    "credit": "Ảnh do học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-c134aa2b1355.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/1c96c3e57990.jpg",
@@ -768,6 +785,7 @@ export const GALLERIES = [
     ],
     "credit": "Học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-6a4056e33050.mp3",
      "en": "assets/giong/en-6452124b7243.mp3"
     }
    },
@@ -777,9 +795,18 @@ export const GALLERIES = [
     "w": 1024,
     "h": 653,
     "goc": "nguon-anh/g4/08-08.Người dân Đăk Tô chuyển đổi cây trồng (trồng cây mắc ca).jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Người dân Đăk Tô chuyển đổi cây trồng",
+    "vi": [
+     "Nhìn những chùm quả căng tròn trên cành cùng nụ cười phấn khởi của người nông dân khi trao đổi kỹ thuật chăm sóc, ta thấy rõ sức sống mới trên vùng đất này. Đây là minh chứng sinh động cho tinh thần năng động, dám nghĩ dám làm trong hành trình chuyển đổi cơ cấu cây trồng ở địa phương."
+    ],
+    "en": [
+     "Seeing the plump clusters of nuts on the branches alongside the farmers' joyful expressions as they share cultivation techniques reveals the vibrant new vitality of this land. It stands as a vivid testament to the dynamic, innovative spirit driving local agricultural transformation."
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-72b7950f77c7.mp3",
+     "en": "assets/giong/en-80138b46e013.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/00dc8192efcd.jpg",
@@ -806,15 +833,16 @@ export const GALLERIES = [
     "w": 693,
     "h": 973,
     "goc": "nguon-anh/g4/10-10. Nghĩa trang liệt sĩ Đăk Tô.jpg",
-    "title": "",
+    "title": "Nghĩa trang liệt sĩ xã Đăk Tô",
     "vi": [
      "Trong ánh hoàng hôn trầm mặc, Nghĩa trang liệt sĩ Đăk Tô hiện lên trang nghiêm với tượng đài \"Tổ quốc ghi công\" vươn cao giữa hàng thông xanh tĩnh lặng. Ánh nến tri ân lung linh xếp thành hình ngôi sao năm cánh trước lễ đài như sưởi ấm giấc ngủ ngàn thu của các anh hùng liệt sĩ đã ngã xuống vì độc lập tự do. Điểm dừng chân thiêng liêng này luôn gợi nhắc mỗi du khách về đạo lý \"Uống nước nhớ nguồn\" sâu nặng của dân tộc Việt Nam."
     ],
     "en": [
      "Bathed in the quiet twilight, the Đăk Tô Martyrs' Cemetery stands in solemn reverence, anchored by the towering \"The Fatherland Remembers Your Sacrifice\" monument amidst tranquil pine trees. Flickering tribute candles arranged in a five-pointed star before the altar illuminate the resting place of the fallen heroes who gave their lives for independence and freedom. This sacred landmark serves as a poignant reminder of Vietnam's deep-rooted gratitude toward those who sacrificed for the nation."
     ],
+    "credit": "Học sinh chụp",
     "audio": {
-     "vi": "assets/giong/vi-d2b0e75500f2.mp3",
+     "vi": "assets/giong/vi-c9a538752154.mp3",
      "en": "assets/giong/en-f676a58ca4b5.mp3"
     }
    },
@@ -824,9 +852,35 @@ export const GALLERIES = [
     "w": 1024,
     "h": 504,
     "goc": "nguon-anh/g4/11-11. Học sinh học tập tại Khu tưởng niệm di tích.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Tiết trải nghiệm nội dung giáo dục địa phương",
+    "vi": [
+     "Quây quần bên sa bàn trận đánh Căn cứ 42 năm 1972, các em học sinh chăm chú lắng nghe từng mũi tiến công hào hùng của cha ông qua lời giảng truyền cảm. Hoạt động trải nghiệm ý nghĩa này giúp những trang sử vàng không còn nằm yên trên sách vở mà thấm sâu vào trái tim thế hệ trẻ."
+    ],
+    "en": [
+     "Gathered around the 3D battle diorama of Base 42 from 1972, students listen intently as each heroic offensive thrust of their forebears is brought to life. This meaningful experiential activity ensures that golden chapters of history leap off the textbook pages and take root in the hearts of the younger generation"
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-10b5bfd21932.mp3"
+    }
+   },
+   {
+    "src": "assets/tranh/g4/963bc34a3e19.jpg",
+    "full": "assets/tranh/g4/963bc34a3e19-lon.jpg",
+    "w": 1024,
+    "h": 576,
+    "goc": "nguon-anh/g4/20261127-223952-05. Nhà rông văn hóa.jfif",
+    "title": "Nhà rông văn hóa xã Đăk Tô",
+    "vi": [
+     "Tiếng Việt: Sừng sững giữa bầu trời xanh trong, Nhà rông văn hóa xã Đăk Tô nổi bật với phần mái tranh cao vút như lưỡi rìu vươn lên đầy kiêu hãnh. Từng họa tiết hoa văn đỏ trắng tinh tế trên vách gỗ cùng bậc cầu thang truyền thống tái hiện trọn vẹn linh hồn kiến trúc và bản sắc cộng đồng các dân tộc Tây Nguyên."
+    ],
+    "en": [
+     "Towering against the clear blue sky, the Đăk Tô Commune Cultural Rông House stands out with its soaring thatched roof rising proudly like an axe blade. Every intricate red-and-white decorative motif on its wooden walls, along with its traditional staircase, fully embodies the architectural soul and communal identity of the Central Highlands' ethnic groups."
+    ],
+    "credit": "Học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-6b65d7d5d0c5.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/222058bb5d50.jpg",
@@ -834,9 +888,17 @@ export const GALLERIES = [
     "w": 848,
     "h": 434,
     "goc": "nguon-anh/g4/12-12. Học sinh tham  quan bia tưởng niệm.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Học sinh viếng thăm di tích lịch sử chiến thắng Đăk Tô - Tân Cảnh",
+    "vi": [
+     "Hình ảnh các em học sinh trong sắc phục truyền thống dân tộc thành kính dâng hương trước bia tưởng niệm tạo nên một bức tranh giao thoa văn hóa và lịch sử thật đẹp. Đây chính là nhịp cầu nối liền quá khứ oanh liệt với hiện tại, bồi đắp lòng tự hào quê hương cho lớp măng non Đăk Tô."
+    ],
+    "en": [
+     "The sight of students dressed in traditional ethnic attire respectfully offering incense before the memorial creates a deeply moving portrait of cultural and historical harmony. It serves as a living bridge connecting a glorious past with the present, nurturing homeland pride among the youth of Đăk Tô."
+    ],
+    "credit": "Ảnh do học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-da0401793ab3.mp3"
+    }
    }
   ]
  }
