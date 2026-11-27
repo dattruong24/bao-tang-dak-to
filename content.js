@@ -435,6 +435,7 @@ export const GALLERIES = [
     "en": [
      "Đăk Tô – Tân Cảnh Victory Historical Site, located in Đăk Tô Commune, Quảng Ngãi Province. Situated along National Route 14, the site was recognized as a National Historical Monument by the Ministry of Culture, Information and Sports (now the Ministry of Culture, Sports and Tourism) under Decision No. 983/VH-QĐ, dated August 4, 1992."
     ],
+    "credit": "Hình do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-69b0ce614715.mp3",
      "en": "assets/giong/en-b362670e76c9.mp3"
@@ -453,6 +454,7 @@ export const GALLERIES = [
     "en": [
      "T-59 Tank, No. 377, was recognized as a National Treasure under Decision No. 41/QĐ-TTg, issued in Hanoi on January 30, 2023. The crew of Tank 377—comprising four soldiers: Platoon Leader Nguyễn Nhân Triển, driver Cao Trần Vịnh, and gunners Hoàng Văn Ái and Nguyễn Đắc Lượng—resolutely fought single-handedly amidst dense enemy fire; all four soldiers heroically sacrificed their lives right at their combat posts during the Đăk Tô – Tân Cảnh campaign (April 24, 1972)."
     ],
+    "credit": "Hình do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-b81ffd0d2400.mp3",
      "en": "assets/giong/en-34d5dab3a465.mp3"
@@ -466,14 +468,15 @@ export const GALLERIES = [
     "goc": "nguon-anh/g3/03-03. Hiện vật của các chiến sĩ trong kíp tăng 377.jpg",
     "title": "Hiện vật của các chiến sĩ trong kíp tăng 377",
     "vi": [
-     "Chân dung, hiện vật của các liệt sĩ trong kíp tăng 377, sơ đồ “sử dụng tăng thiết giáp trong chiến dịch Bắc Tây Nguyên”."
+     "Góc trưng bày tái hiện trang sử hào hùng của kíp xe tăng PT-76 mang số hiệu 377 thuộc Tiểu đoàn 297 trong Chiến dịch Bắc Tây Nguyên năm 1972.. Phía trên là bằng tuyên dương Anh hùng Lực lượng vũ trang nhân dân cùng chân dung 4 chiến sĩ Nguyễn Nhân Triển, Cao Trần Vịnh, Hoàng Văn Ái và Nguyễn Đắc Lượng; ở giữa là lược đồ hoạt động của 28 xe tăng, thiết giáp suốt chiến dịch; và trong tủ kính phía dưới là những kỷ vật thiêng liêng còn lưu giữ được gồm tấm khăn vải, mảnh xác xe tăng, chiếc bi-đông cùng những trang sổ tay của các anh trước khi anh dũng hy sinh sau khi bắn cháy 7 xe tăng địch tại Đắk Tô 2 ngày 24/4/1972."
     ],
     "en": [
-     "Portraits and artifacts of the martyrs of Tank 377's crew, and the diagram “Deployment of Armored Forces in the Northern Central Highlands Campaign.”"
+     "This exhibition corner recreates the heroic chapter of the PT-76 tank No. 377 crew of the 297th Battalion during the 1972 Northern Central Highlands Campaign. Above are the certificate conferring the title Hero of the People's Armed Forces and the portraits of the four soldiers—Nguyễn Nhân Triển, Cao Trần Vịnh, Hoàng Văn Ái, and Nguyễn Đắc Lượng; in the center is the operational map tracking 28 tanks and armored vehicles throughout the campaign; and in the glass case below are the sacred relics preserved from the battlefield—a cloth towel, fragments of the tank's wreckage, a canteen, and the soldiers' notebooks—before they heroically sacrificed their lives after knocking out seven enemy tanks at Đắk Tô 2 on April 24, 1972."
     ],
+    "credit": "Nhà trưng bày di tích chiến thắng Đăk Tô - Tân Cảnh",
     "audio": {
-     "vi": "assets/giong/vi-5a33eb9f0723.mp3",
-     "en": "assets/giong/en-487c15f33899.mp3"
+     "vi": "assets/giong/vi-88b51f3bffac.mp3",
+     "en": "assets/giong/en-f67f5a4f481f.mp3"
     }
    },
    {
