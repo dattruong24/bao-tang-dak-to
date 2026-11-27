@@ -258,6 +258,7 @@ export const GALLERIES = [
     "en": [
      "This photograph captures the valiant moment our troops (including infantry and radio signalmen) charged through thick smoke to assault the Đăk Tô – Tân Cảnh base. Braving steep mountainous terrain and heavy enemy fire, their swift footsteps courageously breached the enemy's defensive lines."
     ],
+    "credit": "Ảnh tư liệu Thông tấn xã Việt Nam",
     "audio": {
      "vi": "assets/giong/vi-713b37a4d0f7.mp3",
      "en": "assets/giong/en-eb9a2171ad68.mp3"
@@ -276,6 +277,7 @@ export const GALLERIES = [
     "en": [
      "At 11:00 AM on April 24, 1972, Regiment 66 took complete control of the base. The Liberation flag, presented to Regiment 66 by the Kon Tum Provincial Party Committee before the troops set out, was raised by Squad Leader Nguyễn Xuân Hoàng of Company 2 and fluttered proudly over the center of the base."
     ],
+    "credit": "Ảnh tư liệu Bảo tàng Binh đoàn Tây Nguyên",
     "audio": {
      "vi": "assets/giong/vi-cdec3839f1ed.mp3",
      "en": "assets/giong/en-f9c395bdb225.mp3"
@@ -294,6 +296,7 @@ export const GALLERIES = [
     "en": [
      "With the determination that \"Trường Sơn stirs – Pô Kô surges, sweeping away the enemy to liberate Đăk Tô\" and \"Everything for the front line, everything to defeat the American invaders,\" the ethnic peoples across Kon Tum province mobilized their utmost human and material resources for this campaign."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-400a490934d3.mp3",
      "en": "assets/giong/en-423c78602d6f.mp3"
@@ -312,6 +315,7 @@ export const GALLERIES = [
     "en": [
      "Moment at 11:00 AM on April 24, 1972, as the Liberation Army's victory flag fluttered proudly atop the command bunker of Base 42 (Đăk Tô – Tân Cảnh). Beneath the triumphant banner stands the fallen welcome sign of the Saigon army's II Corps."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-1f34eff0542a.mp3",
      "en": "assets/giong/en-454f9de74646.mp3"
@@ -330,6 +334,7 @@ export const GALLERIES = [
     "en": [
      "This archival photograph captures a long column of 429 enemy prisoners of war captured after our forces shattered the Regiment 42 base in Đăk Tô – Tân Cảnh. Escorted by Liberation Army soldiers, the disarmed prisoners marched in defeat out of the fallen stronghold."
     ],
+    "credit": "Ảnh do Bảo tàng Kon Tum cung cấp",
     "audio": {
      "vi": "assets/giong/vi-d9725a45e6f9.mp3",
      "en": "assets/giong/en-c71c85c9c601.mp3"
@@ -348,6 +353,7 @@ export const GALLERIES = [
     "en": [
      "This is a panoramic view of Hill 1015 – Charlie Hill today, a strategic vantage point guarding the southwest of the Đăk Tô – Tân Cảnh base. During the 1972 Spring–Summer Offensive, fierce battles raged here, wiping out the enemy's 11th Airborne Battalion and shattering their outer \"steel shield\" to open the gateway for the liberation of Tân Cảnh."
     ],
+    "credit": "Hình do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-01fb510ead0a.mp3",
      "en": "assets/giong/en-3b923008640a.mp3"
@@ -366,6 +372,7 @@ export const GALLERIES = [
     "en": [
      "This aerial view captures Hill 1015 – Charlie Hill today, which once served as a vital defensive outpost guarding the southwestern flank of Đăk Tô – Tân Cảnh. During the 1972 Spring–Summer Offensive, our forces wiped out the 11th Airborne Battalion here, shattering the outer \"steel shield\" and opening the gateway to liberate Tân Cảnh."
     ],
+    "credit": "Hình do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-20971e8749ce.mp3",
      "en": "assets/giong/en-4cc1b2bb4dd0.mp3"
@@ -384,6 +391,7 @@ export const GALLERIES = [
     "en": [
      "Looking across Hills 1015 and 1049 today, these barren slopes covered only in dry cogon grass—where forest trees still cannot grow—stand as a painful testament to the U.S. chemical warfare, even half a century after the war ended."
     ],
+    "credit": "Hình học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-7b5d1a0cf4f4.mp3",
      "en": "assets/giong/en-772a8d46da9f.mp3"
@@ -402,20 +410,11 @@ export const GALLERIES = [
     "en": [
      "This cluttered battlefield scene of military vehicles, ammunition crates, and shattered fortifications vividly recreates the overwhelming firepower of the Liberation Army during the historic battle on April 24, 1972."
     ],
+    "credit": "Ảnh tư liệu lưu trữ tại nhà trưng bày di tích chiến thắng ĐăkTô - Tân Cảnh)",
     "audio": {
      "vi": "assets/giong/vi-ee735ea69ce9.mp3",
      "en": "assets/giong/en-7aa338ab9ab8.mp3"
     }
-   },
-   {
-    "src": "assets/tranh/g2/c5e7f4a7e8ca.jpg",
-    "full": "assets/tranh/g2/c5e7f4a7e8ca-lon.jpg",
-    "w": 800,
-    "h": 450,
-    "goc": "nguon-anh/g2/13-Sa bàn diễn biến trận đánh.jpg",
-    "title": "Sa bàn diễn biến trận đánh",
-    "vi": [],
-    "en": []
    }
   ]
  },
