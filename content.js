@@ -201,6 +201,7 @@ export const GALLERIES = [
      "Early morning of April 24: From the East, Regiment 66, reinforced by T-54/T-64 tanks—making their debut in the Central Highlands—unexpectedly crossed the Pô Kô River and coordinated with northern columns to strike directly into Tân Cảnh. By noon, our forces had taken complete control of the base.",
      "Afternoon of April 24: Pressing the advantage, attacking columns from the North and the West (Đăk Mốt) converged to encircle and completely wipe out the Đăk Tô 2 base.  Within just one day and night of direct assault, our troops shattered the enemy's \"steel gate\" in the Northern Central Highlands, annihilated the Saigon army's 22nd Division, and completely liberated the historic land of Đăk Tô – Tân Cảnh."
     ],
+    "credit": "Trích từ \"Từ điển Bách khoa Quân sự Việt Nam\"-NXB Quân đội nhân dân, Hà Nội, 2004, tư liệu số hóa của TTXVN",
     "audio": {
      "vi": "assets/giong/vi-65de156eea12.mp3",
      "en": "assets/giong/en-c03f302adc36.mp3"
@@ -219,6 +220,7 @@ export const GALLERIES = [
     "en": [
      "This historic photograph captures tanks of Tank Battalion 279 (Central Highlands Front), heavily camouflaged with forest foliage, rolling out through the dense jungle to assault the Đăk Tô – Tân Cảnh base on the morning of April 24, 1972. This marked the very first combat debut of our armored forces on the Central Highlands battlefield."
     ],
+    "credit": "Ảnh tư liệu Thông tấn xã Việt Nam",
     "audio": {
      "vi": "assets/giong/vi-b69a264bd2c6.mp3",
      "en": "assets/giong/en-7ed3a7e9030a.mp3"
@@ -237,6 +239,7 @@ export const GALLERIES = [
     "en": [
      "This photograph captures the intense combat spirit of the Artillery Corps providing heavy fire support during the Đăk Tô – Tân Cảnh campaign. With relentless and accurate barrages, these \"brass-footed, iron-shouldered\" soldiers completely suppressed enemy artillery positions and fortified bunkers. This overwhelming firepower cleared the way for our infantry and tanks to charge forward and annihilate the enemy's fortified complex."
     ],
+    "credit": "Ảnh tư liệu Thông tấn xã Việt Nam/Lưu trữ lịch sử quân sự",
     "audio": {
      "vi": "assets/giong/vi-0661b09d97a7.mp3",
      "en": "assets/giong/en-9ccfae745ded.mp3"
