@@ -776,6 +776,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh do học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-8d717b3a2ee4.mp3",
      "en": "assets/giong/en-61ceeab9fe35.mp3"
     }
    },
@@ -794,6 +795,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-c24e9463d09b.mp3",
      "en": "assets/giong/en-cc991ace49ef.mp3"
     }
    },
@@ -868,6 +870,7 @@ export const GALLERIES = [
     ],
     "credit": "Ảnh học sinh chụp",
     "audio": {
+     "vi": "assets/giong/vi-d2c6bacfc750.mp3",
      "en": "assets/giong/en-8e368bc5141d.mp3"
     }
    },
@@ -877,9 +880,18 @@ export const GALLERIES = [
     "w": 848,
     "h": 434,
     "goc": "nguon-anh/g4/12-12. Học sinh tham  quan bia tưởng niệm.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Học sinh tham quan bia tưởng niệm",
+    "vi": [
+     "Hình ảnh các em học sinh trong sắc phục truyền thống dân tộc thành kính dâng hương trước bia tưởng niệm tạo nên một bức tranh giao thoa văn hóa và lịch sử thật đẹp. Đây chính là nhịp cầu nối liền quá khứ oanh liệt với hiện tại, bồi đắp lòng tự hào quê hương cho lớp măng non Đăk Tô."
+    ],
+    "en": [
+     "The sight of students dressed in traditional ethnic attire respectfully offering incense before the memorial creates a deeply moving portrait of cultural and historical harmony. It serves as a living bridge connecting a glorious past with the present, nurturing homeland pride among the youth of Đăk Tô"
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "vi": "assets/giong/vi-88da6f7600d1.mp3",
+     "en": "assets/giong/en-48eb42f79abc.mp3"
+    }
    }
   ]
  }
