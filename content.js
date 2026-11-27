@@ -757,6 +757,7 @@ export const GALLERIES = [
      "the Đăk Tô Commune Cultural Rông House commands attention with its towering thatched roof shaped like a proud axe blade. Intricate red-and-white geometric motifs on its wooden walls and traditional staircases capture the architectural soul and communal spirit of the Central Highlands' ethnic groups."
     ],
     "audio": {
+     "vi": "assets/giong/vi-4c1df2adbb34.mp3",
      "en": "assets/giong/en-b0d4dec2cc44.mp3"
     }
    },
@@ -840,9 +841,17 @@ export const GALLERIES = [
     "w": 693,
     "h": 973,
     "goc": "nguon-anh/g4/10-10. Nghĩa trang liệt sĩ Đăk Tô.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Nghĩa trang liệt sĩ xã Đăk Tô",
+    "vi": [
+     "Trong ánh hoàng hôn trầm mặc, Nghĩa trang liệt sĩ Đăk Tô hiện lên trang nghiêm với tượng đài \"Tổ quốc ghi công\" vươn cao giữa hàng thông xanh tĩnh lặng. Ánh nến tri ân lung linh xếp thành hình ngôi sao năm cánh trước lễ đài như sưởi ấm giấc ngủ ngàn thu của các anh hùng liệt sĩ đã ngã xuống vì độc lập tự do"
+    ],
+    "en": [
+     "Bathed in the quiet twilight, the Đăk Tô Martyrs' Cemetery stands in solemn reverence, anchored by the towering \"The Fatherland Remembers Your Sacrifice\" monument amidst tranquil pine trees. Flickering tribute candles arranged in a five-pointed star before the altar illuminate the resting place of the fallen heroes who gave their lives for independence and freedom."
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-51911079e63d.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/1805aac3bd06.jpg",
@@ -850,9 +859,17 @@ export const GALLERIES = [
     "w": 1024,
     "h": 504,
     "goc": "nguon-anh/g4/11-11. Học sinh học tập tại Khu tưởng niệm di tích.jpg",
-    "title": "",
-    "vi": [],
-    "en": []
+    "title": "Học sinh học tập tại Khu tưởng niệm di tíc",
+    "vi": [
+     "Không gian Nhà trưng bày Di tích Chiến thắng Đăk Tô – Tân Cảnh trở nên sống động hơn bao giờ hết qua những tiết học lịch sử thực tế đầy cuốn hút của thầy và trò địa phương. Quây quần bên sa bàn trận đánh Căn cứ 42 năm 1972, các em học sinh chăm chú lắng nghe từng mũi tiến công hào hùng của cha ông qua lời giảng truyền cảm. Hoạt động trải nghiệm ý nghĩa này giúp những trang sử vàng không còn nằm yên trên sách vở mà thấm sâu vào trái tim thế hệ trẻ."
+    ],
+    "en": [
+     "The Exhibition House of the Đăk Tô – Tân Cảnh Victory Historical Site comes alive through engaging, hands-on history lessons for local teachers and students. Gathered around the 3D battle diorama of Base 42 from 1972, students listen intently as each heroic offensive thrust of their forebears is brought to life. This meaningful experiential activity ensures that golden chapters of history leap off the textbook pages and take root in the hearts of the younger generation"
+    ],
+    "credit": "Ảnh học sinh chụp",
+    "audio": {
+     "en": "assets/giong/en-8e368bc5141d.mp3"
+    }
    },
    {
     "src": "assets/tranh/g4/222058bb5d50.jpg",
