@@ -435,7 +435,7 @@ export const GALLERIES = [
     "en": [
      "Đăk Tô – Tân Cảnh Victory Historical Site, located in Đăk Tô Commune, Quảng Ngãi Province. Situated along National Route 14, the site was recognized as a National Historical Monument by the Ministry of Culture, Information and Sports (now the Ministry of Culture, Sports and Tourism) under Decision No. 983/VH-QĐ, dated August 4, 1992."
     ],
-    "credit": "Hình do học sinh chụp",
+    "credit": "Ảnh do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-69b0ce614715.mp3",
      "en": "assets/giong/en-b362670e76c9.mp3"
@@ -454,7 +454,7 @@ export const GALLERIES = [
     "en": [
      "T-59 Tank, No. 377, was recognized as a National Treasure under Decision No. 41/QĐ-TTg, issued in Hanoi on January 30, 2023. The crew of Tank 377—comprising four soldiers: Platoon Leader Nguyễn Nhân Triển, driver Cao Trần Vịnh, and gunners Hoàng Văn Ái and Nguyễn Đắc Lượng—resolutely fought single-handedly amidst dense enemy fire; all four soldiers heroically sacrificed their lives right at their combat posts during the Đăk Tô – Tân Cảnh campaign (April 24, 1972)."
     ],
-    "credit": "Hình do học sinh chụp",
+    "credit": "Ảnh do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-b81ffd0d2400.mp3",
      "en": "assets/giong/en-34d5dab3a465.mp3"
@@ -473,7 +473,7 @@ export const GALLERIES = [
     "en": [
      "This exhibition corner recreates the heroic chapter of the PT-76 tank No. 377 crew of the 297th Battalion during the 1972 Northern Central Highlands Campaign. Above are the certificate conferring the title Hero of the People's Armed Forces and the portraits of the four soldiers—Nguyễn Nhân Triển, Cao Trần Vịnh, Hoàng Văn Ái, and Nguyễn Đắc Lượng; in the center is the operational map tracking 28 tanks and armored vehicles throughout the campaign; and in the glass case below are the sacred relics preserved from the battlefield—a cloth towel, fragments of the tank's wreckage, a canteen, and the soldiers' notebooks—before they heroically sacrificed their lives after knocking out seven enemy tanks at Đắk Tô 2 on April 24, 1972."
     ],
-    "credit": "Nhà trưng bày di tích chiến thắng Đăk Tô - Tân Cảnh",
+    "credit": "Ảnh chụp lại ở Nhà trưng bày di tích chiến thắng Đăk Tô - Tân Cảnh",
     "audio": {
      "vi": "assets/giong/vi-88b51f3bffac.mp3",
      "en": "assets/giong/en-f67f5a4f481f.mp3"
@@ -492,6 +492,7 @@ export const GALLERIES = [
     "en": [
      "In remembrance of the feats of arms and in recognition of the merits of the heroic martyrs of Tank 377's crew, on September 1, 2009, President Nguyễn Minh Triết signed a Decision conferring the title Hero of the People's Armed Forces upon the crew of Tank 377."
     ],
+    "credit": "Ảnh chụp lại ở Nhà trưng bày di tích chiến thắng Đăk Tô - Tân Cảnh",
     "audio": {
      "vi": "assets/giong/vi-ae36824f2087.mp3",
      "en": "assets/giong/en-9cd40dbbbc4c.mp3"
@@ -504,8 +505,17 @@ export const GALLERIES = [
     "h": 1024,
     "goc": "nguon-anh/g3/05-05. Quyết định công nhận bảo vật quốc gia xe tăng T59, hiệu 377.pdf",
     "title": "Quyết định công nhận bảo vật quốc gia xe tăng T59, hiệu 377",
-    "vi": [],
-    "en": []
+    "vi": [
+     "“Quyết định số 41/QĐ-TTg” do Phó Thủ tướng Chính phủ Trần Hồng Hà ký thay Thủ tướng Chính phủ ban hành ngày 30/01/2023 là văn bản pháp lý cấp Nhà nước về việc công nhận Bảo vật quốc gia (đợt 11, năm 2022) đối với 27 hiện vật, nhóm hiện vật tiêu biểu trên cả nước. Đặc biệt, tại Mục 27, Điều 1 của Quyết định, \"Xe tăng T59 số hiệu 377\" (niên đại năm 1972, lưu giữ tại huyện Đăk Tô, tỉnh Kon Tum) nay là xã Đăk Tô, tỉnh Quảng Ngãi đã chính thức được ghi danh là Bảo vật quốc gia."
+    ],
+    "en": [
+     "Decision No. 41/QĐ-TTg, issued on January 30, 2023, and signed by Deputy Prime Minister Trần Hồng Hà on behalf of the Prime Minister, is a state-level legal document recognizing 27 representative artifacts and groups of artifacts across the country as National Treasures (11th batch, 2022). Notably, under Item 27, Article 1 of the Decision, Tank T-59 No. 377 (dating from 1972 and preserved in Đăk Tô District, Kon Tum Province—now Đăk Tô Commune, Quảng Ngãi Province) was officially inscribed as a National Treasure."
+    ],
+    "credit": "Cổng thông tin điện tử chính phủ (chinhphu.vn)",
+    "audio": {
+     "vi": "assets/giong/vi-8a5c947757ca.mp3",
+     "en": "assets/giong/en-7d10b00a3c94.mp3"
+    }
    },
    {
     "src": "assets/tranh/g3/f086acbeafa2.jpg",
@@ -520,6 +530,7 @@ export const GALLERIES = [
     "en": [
      "Portraits of the four heroic martyrs of the T-59 Tank No. 377 crew (Company 7, Battalion 297, 203rd Tank Regiment), who achieved the extraordinary feat of fighting \"one against ten,\" destroying seven enemy tanks before heroically sacrificing their lives during the offensive against the Đăk Tô – Tân Cảnh base on April 24, 1972."
     ],
+    "credit": "Ảnh chụp lại ở Nhà trưng bày di tích chiến thắng Đăk Tô - Tân Cảnh",
     "audio": {
      "vi": "assets/giong/vi-6013865e7749.mp3",
      "en": "assets/giong/en-5e13263eb391.mp3"
@@ -538,6 +549,7 @@ export const GALLERIES = [
     "en": [
      "The Memorial Stele House serves as a \"red address\" (a vital historical landmark) dedicated to educating present and future generations on patriotic traditions and deep gratitude toward the heroic martyrs."
     ],
+    "credit": "Ảnh do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-6df288fafe21.mp3",
      "en": "assets/giong/en-1843da4c0c04.mp3"
@@ -556,27 +568,10 @@ export const GALLERIES = [
     "en": [
      "During the battle on April 24, 1972, Tank 377 was engulfed in flames beside the shattered remains of the heroes, leaving behind only rice balls burned to charcoal that the crew had not yet had time to eat between battles."
     ],
+    "credit": "Ảnh tư liệu Bảo tàng Tăng thiết giáp",
     "audio": {
      "vi": "assets/giong/vi-325c15b2ee00.mp3",
      "en": "assets/giong/en-d64de73e075c.mp3"
-    }
-   },
-   {
-    "src": "assets/tranh/g3/61cf40c66295.jpg",
-    "full": "assets/tranh/g3/61cf40c66295-lon.jpg",
-    "w": 1024,
-    "h": 1024,
-    "goc": "nguon-anh/g3/09-09. Bi đông và sổ học chính trị.png",
-    "title": "Bi đông và sổ học chính trị",
-    "vi": [
-     "Bi đông và sổ học tập chính trị của Trung đội trưởng Nguyễn Nhân Triển – Ảnh tư liệu BT Tăng Thiết Giáp."
-    ],
-    "en": [
-     "Canteen and political study notebook of Platoon Leader Nguyễn Nhân Triển – Archival photo from the Armored Forces Museum."
-    ],
-    "audio": {
-     "vi": "assets/giong/vi-89ed9d84d560.mp3",
-     "en": "assets/giong/en-f6e6bcdb14ba.mp3"
     }
    },
    {
@@ -592,6 +587,7 @@ export const GALLERIES = [
     "en": [
      "Canteen and political study notebook of Platoon Leader Nguyễn Nhân Triển – Archival photo from the Armored Forces Museum."
     ],
+    "credit": "Ảnh tư liệu Bảo tàng Tăng thiết giáp",
     "audio": {
      "vi": "assets/giong/vi-ca69d4dd866e.mp3",
      "en": "assets/giong/en-f6e6bcdb14ba.mp3"
@@ -610,6 +606,7 @@ export const GALLERIES = [
     "en": [
      "The last letter from Martyr Nguyễn Đắc Lượng sent to his older brother. – Archival photo from the Armored Forces Museum"
     ],
+    "credit": "Ảnh tư liệu Bảo tàng Tăng thiết giáp",
     "audio": {
      "vi": "assets/giong/vi-a44769794f78.mp3",
      "en": "assets/giong/en-e230a64e273c.mp3"
@@ -628,6 +625,7 @@ export const GALLERIES = [
     "en": [
      "Right within the grounds of the Đăk Tô – Tân Cảnh Victory Historical Site, the crater left by an MK80 bomb dropped by U.S.–Saigon forces during the 1972 Spring–Summer Campaign is preserved within a low concrete border alongside a commemorative stone plaque and an incense burner in front."
     ],
+    "credit": "Ản do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-dc1dff1e118d.mp3",
      "en": "assets/giong/en-f54c4d1466cb.mp3"
@@ -666,6 +664,7 @@ export const GALLERIES = [
     "en": [
      "On January 18, 2022, the Prime Minister signed Decision No. 93/QĐ-TTg adding the Historical Sites of Hill 1015 and Hill 1049, in Sa Thầy District and Đắk Tô District, Kon Tum Province, to the Special National Monument of the Đắk Tô – Tân Cảnh Victory Site."
     ],
+    "credit": "Ảnh do học sinh chụp",
     "audio": {
      "vi": "assets/giong/vi-e0063ca1e8ec.mp3",
      "en": "assets/giong/en-8944e8df90ee.mp3"
